@@ -95,7 +95,7 @@ project "JadeEngine"
 
     postbuildcommands {
         "copy /y \"$(OutDir)JadeEngine.dll\" \"$(OutDir)..\\JadeEditor\\JadeEngine.dll\"",
-        --"copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(OutDir)..\\JadeEditor\\mono-2.0-sgen.dll\"",
+        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(OutDir)..\\JadeEditor\\mono-2.0-sgen.dll\"",
         "copy /y \"$(SolutionDir)JadeEngine\\vendor\\GLFW\\bin\\%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}\\GLFW\\GLFW.dll\" \"$(OutDir)..\\JadeEditor\\GLFW.dll\""
     }
     
@@ -199,5 +199,38 @@ project "JadeEditor"
 
     filter "configurations:Dist"
         defines "_JADE_DIST"
+        runtime "Release"
+        optimize "on"
+
+
+project "JadeScriptRuntime"
+    location "JadeScriptRuntime"
+    kind "ConsoleApp"
+    language "C#"
+
+    fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    nuget {
+        "Microsoft.CodeAnalysis.CSharp.Workspaces:3.7.0",
+        "Microsoft.CodeAnalysis.CSharp:3.7.0"
+	}
+
+    files {
+        "%{prj.name}/src/**.cs"
+    }
+
+    filter "configurations:Debug"
+        runtime "Debug"
+        symbols "on"
+
+
+    filter "configurations:Release"
+        runtime "Release"
+        optimize "on"
+
+
+    filter "configurations:Dist"
         runtime "Release"
         optimize "on"

@@ -48,6 +48,21 @@ namespace Jade {
         printf("\n");
     }
 
+    void Log::_ScriptError(const char* filename, int line, const char* format, ...)
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
+        printf("%s (line %d) Script Error: \n", filename, line);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+        printf("-> ");
+
+        va_list args;
+        va_start(args, format);
+        vprintf(format, args);
+        va_end(args);
+
+        printf("\n");
+    }
+
     void Log::_Assert(const char* filename, int line, int condition, const char* format, ...) {
         if (!condition) {
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);

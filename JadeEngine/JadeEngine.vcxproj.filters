@@ -52,6 +52,12 @@
     <Filter Include="include\jade">
       <UniqueIdentifier>{EC16DD69-D879-6C0E-81FF-A4C46D413891}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\jade\ScriptingInterop">
+      <UniqueIdentifier>{CF0368FC-3B1C-4F26-04C9-DEBF70A0E3BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\jade\ScriptingInterop\Native">
+      <UniqueIdentifier>{850022A5-71E7-E39C-1A38-4ABA06FE5C03}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\jade\commands">
       <UniqueIdentifier>{CDD7AF9B-3944-6B96-0238-03F46E638DFE}</UniqueIdentifier>
     </Filter>
@@ -129,6 +135,15 @@
     <ClInclude Include="Jade.h" />
     <ClInclude Include="include\externalLibs.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\ScriptingInterop\Logger.h">
+      <Filter>include\jade\ScriptingInterop</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\ScriptingInterop\Native\Compiler.h">
+      <Filter>include\jade\ScriptingInterop\Native</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\ScriptingInterop\Test.h">
+      <Filter>include\jade\ScriptingInterop</Filter>
     </ClInclude>
     <ClInclude Include="include\jade\commands\ChangeEnumCommand.h">
       <Filter>include\jade\commands</Filter>

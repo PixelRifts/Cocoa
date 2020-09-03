@@ -21,25 +21,27 @@ namespace JadeScriptRuntime
 
 		static void Main(string[] args)
 		{
-			var codeProvider = new CSharpCodeProvider();
+			//var codeProvider = new CSharpCodeProvider();
 
-			var parameters = new CompilerParameters();
-			parameters.GenerateExecutable = true;
+			//var parameters = new CompilerParameters();
+			//parameters.GenerateExecutable = true;
 
-			var results = codeProvider.CompileAssemblyFromSource(parameters, sourceCode);
+			//var results = codeProvider.CompileAssemblyFromSource(parameters, sourceCode);
 
-			if (results.Errors.Count > 0)
-			{
-				foreach (CompilerError CompError in results.Errors)
-				{
-					Console.WriteLine($"Line Number: {CompError.Line}, Error Number: {CompError.ErrorNumber}, '{CompError.ErrorText}'");
-				}
-			}
+			//if (results.Errors.Count > 0)
+			//{
+			//	foreach (CompilerError CompError in results.Errors)
+			//	{
+			//		Console.WriteLine($"Line Number: {CompError.Line}, Error Number: {CompError.ErrorNumber}, '{CompError.ErrorText}'");
+			//	}
+			//}
 
-			Console.WriteLine($"{results.PathToAssembly}");
-			File.Copy(results.PathToAssembly, $"{Directory.GetCurrentDirectory()}/Hello.exe");
+			//Console.WriteLine($"{results.PathToAssembly}");
+			//File.Copy(results.PathToAssembly, $"{Directory.GetCurrentDirectory()}/Hello.exe");
 
-			Console.ReadLine();
+			//Console.ReadLine();
+
+			Jade.InitPlugin();
 		}
 	}
 }

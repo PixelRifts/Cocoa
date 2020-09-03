@@ -377,7 +377,7 @@ namespace Jade
 		colors[ImGuiCol_TitleBgActive] = From(Settings::EditorStyle::s_MainBgDark0);
 		colors[ImGuiCol_MenuBarBg] = From(Settings::EditorStyle::s_MainBgDark0);
 		colors[ImGuiCol_MenuBarButtonBg] = From(Settings::EditorStyle::s_AccentDark0);
-		colors[ImGuiCol_MenuBarButtonBgHover] = From(Settings::EditorStyle::s_AccentDark0);
+		colors[ImGuiCol_MenuBarButtonBgHover] = From(Settings::EditorStyle::s_AccentDark1);
 		colors[ImGuiCol_MenuBarButtonBgActive] = From(Settings::EditorStyle::s_AccentDark1);
 
 		colors[ImGuiCol_Tab] = From(Settings::EditorStyle::s_MainBgDark0);
