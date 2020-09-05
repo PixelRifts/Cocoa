@@ -46,8 +46,8 @@ namespace Jade
 	void ScriptRuntime::AddInternalCallsToCSharp()
 	{
 		mono_add_internal_call("JadeScriptRuntime.Jade::Init", &Interop::Init);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogWarning", &Interop::_LogWarning);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogError", &Interop::_LogError);
+		//mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo1);
+		mono_add_internal_call("JadeScriptRuntime.Debug::_LogWarning", &Interop::_LogWarning1);
+		mono_add_internal_call("JadeScriptRuntime.Debug::_LogError", &Interop::_LogError1);
 	}
 }

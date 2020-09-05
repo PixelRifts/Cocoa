@@ -7,25 +7,26 @@
 
 namespace Jade
 {
-	namespace Interop
+	namespace Glue
 	{
 		extern "C"
 		{
-			void _LogInfo1(MonoString* message)
+			JADE void _LogInfo(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
+				Log::Info("Calling from new dll...");
 				Log::Info(str);
 				mono_free(str);
 			}
 
-			void _LogWarning1(MonoString* message)
+			JADE void _LogWarning(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
 				Log::Warning(str);
 				mono_free(str);
 			}
 
-			void _LogError1(MonoString* message)
+			JADE void _LogError(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
 				Log::ScriptError(str);
