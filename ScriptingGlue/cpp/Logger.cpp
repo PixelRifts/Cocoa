@@ -11,12 +11,10 @@ namespace Jade
 	{
 		extern "C"
 		{
-			JADE void _LogInfo(MonoString* message)
+			JADE void _LogInfo(const char* message)
 			{
-				char* str = mono_string_to_utf8(message);
-				Log::Info("Calling from new dll...");
-				Log::Info(str);
-				mono_free(str);
+				Log::Info("Calling from new dll1");
+				Log::Info(message);
 			}
 
 			JADE void _LogWarning(MonoString* message)

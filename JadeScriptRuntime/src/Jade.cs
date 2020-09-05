@@ -28,7 +28,7 @@ namespace JadeScriptRuntime
 
 			IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(_delegate);
 
-			Init(funcPtr);
+			//Init(funcPtr);
 		}
 	}
 }

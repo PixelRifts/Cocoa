@@ -4,6 +4,76 @@
     "C:\\dev\\C++\\JadeEngine\\JadeScriptRuntime\\JadeScriptRuntime.csproj": {}
   },
   "projects": {
+    "C:\\dev\\C++\\JadeEngine\\JadeEngine\\JadeEngine.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\JadeEngine.vcxproj",
+        "projectName": "JadeEngine",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\JadeEngine.vcxproj",
+        "frameworks": {
+          "native": {
+            "projectReferences": {
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj",
+        "projectName": "Box2D",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj",
+        "projectName": "Glad",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj",
+        "projectName": "GLFW",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\imguiVendor\\ImGui.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\imguiVendor\\ImGui.vcxproj",
+        "projectName": "ImGui",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\imguiVendor\\ImGui.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
     "C:\\dev\\C++\\JadeEngine\\JadeScriptRuntime\\JadeScriptRuntime.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -27,7 +97,11 @@
         },
         "frameworks": {
           "net472": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj"
+              }
+            }
           }
         }
       },
@@ -55,6 +129,38 @@
         "win-x86": {
           "#import": []
         }
+      }
+    },
+    "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj",
+        "projectName": "ScriptingGlue",
+        "projectPath": "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj",
+        "frameworks": {
+          "native": {
+            "projectReferences": {
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\JadeEngine.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\JadeEngine.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\box2DVendor\\Box2D.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\glad\\Glad.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\GLFW\\GLFW.vcxproj"
+              },
+              "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\imguiVendor\\ImGui.vcxproj": {
+                "projectPath": "C:\\dev\\C++\\JadeEngine\\JadeEngine\\vendor\\imguiVendor\\ImGui.vcxproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
       }
     }
   }

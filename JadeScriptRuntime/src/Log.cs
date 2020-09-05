@@ -13,8 +13,9 @@ namespace JadeScriptRuntime
 		// -------------------------------------------------------
 		// Native code declarations
 		// -------------------------------------------------------
-		[DllImport("C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/ScriptGlue", EntryPoint = "_LogInfo")]
-		static extern void _LogInfo(string message);
+		[DllImport("ScriptingGlue", EntryPoint = "_LogInfo", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+		//[MethodImpl(MethodImplOptions.InternalCall)]
+		static extern void _LogInfo([MarshalAs(UnmanagedType.LPStr)]string message);
 
 		[MethodImpl(MethodImplOptions.InternalCall)]
 		static extern void _LogWarning(string message);

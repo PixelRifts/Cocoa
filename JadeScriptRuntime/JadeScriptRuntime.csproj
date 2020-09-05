@@ -57,6 +57,10 @@
     <Compile Include="src\ScriptableComponent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScriptingGlue\ScriptingGlue.vcxproj">
+      <Project>{65B077C1-D170-F3F7-9AAB-3C75062B38D4}</Project>
+      <Name>ScriptingGlue</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0"/>
@@ -70,4 +74,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\JadeScriptRuntime.exe" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\JadeScriptRuntime.exe"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

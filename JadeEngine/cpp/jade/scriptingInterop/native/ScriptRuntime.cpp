@@ -11,7 +11,7 @@ namespace Jade
 		mono_set_dirs("C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\lib", "C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\etc");
 
 		s_Domain = mono_jit_init("JadeEngineScriptRuntime");
-		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeScriptRuntime/JadeScriptRuntime.exe";
+		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptRuntime.exe";
 		AddInternalCallsToCSharp();
 		MonoAssembly* assembly = OpenCSharpExe(scriptRuntime);
 
@@ -27,7 +27,7 @@ namespace Jade
 
 	MonoAssembly* ScriptRuntime::OpenCSharpExe(JPath pathToExe)
 	{
-		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeScriptRuntime/JadeScriptRuntime.exe";
+		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptRuntime.exe";
 		MonoImageOpenStatus status;
 		MonoAssembly* assembly = mono_assembly_open(scriptRuntime.Filepath(), &status);
 		if (!assembly)
@@ -45,8 +45,8 @@ namespace Jade
 
 	void ScriptRuntime::AddInternalCallsToCSharp()
 	{
-		mono_add_internal_call("JadeScriptRuntime.Jade::Init", &Interop::Init);
-		//mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo1);
+		//mono_add_internal_call("JadeScriptRuntime.Jade::Init", &Interop::Init);
+		mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo1);
 		mono_add_internal_call("JadeScriptRuntime.Debug::_LogWarning", &Interop::_LogWarning1);
 		mono_add_internal_call("JadeScriptRuntime.Debug::_LogError", &Interop::_LogError1);
 	}

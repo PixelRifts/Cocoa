@@ -35,6 +35,7 @@ project "JadeEngine"
     cppdialect "C++17"
     staticruntime "off"
 
+    fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -76,7 +77,7 @@ project "JadeEngine"
         "opengl32.lib",
         "Glad",
         "Box2D",
-        "JadeEngine/vendor/monoVendor/lib/mono-2.0-sgen.lib"
+        "JadeEngine/vendor/monoVendor/lib/mono-2.0-sgen.lib",
 	}
 
     filter { "system:windows", "configurations:Debug" }
@@ -94,9 +95,10 @@ project "JadeEngine"
 		}
 
     postbuildcommands {
-        "copy /y \"$(OutDir)JadeEngine.dll\" \"$(OutDir)..\\JadeEditor\\\"",
-        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(OutDir)..\\JadeEditor\\mono-2.0-sgen.dll\"",
-        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\GLFW\\bin\\%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}\\GLFW\\GLFW.dll\" \"$(OutDir)..\\JadeEditor\\GLFW.dll\""
+        "mkdir \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\"",
+        "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeEngine.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\JadeEngine.dll\"",
+        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\mono-2.0-sgen.dll\"",
+        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\GLFW\\bin\\%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}\\GLFW\\GLFW.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\GLFW.dll\""
     }
     
 	filter "configurations:Debug"
@@ -158,6 +160,8 @@ project "JadeEditor"
 
     links {
         "JadeEngine",
+        "JadeScriptRuntime",
+        "ScriptingGlue",
         "ImGui",
 		"GLFW",
         "opengl32.lib",
@@ -211,6 +215,7 @@ project "ScriptingGlue"
     staticruntime "off"
 
     fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
+    editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -258,7 +263,7 @@ project "ScriptingGlue"
         systemversion "latest"		
 
         postbuildcommands {
-            --"xcopy /s /e /q /y /i \"$(SolutionDir)\\%{prj.name}\\assets\" \"$(SolutionDir)\\%{fullOutputDir}\\assets\" > nul",
+            "copy /y \"$(SolutionDir)%{fullOutputDir}\\ScriptingGlue.dll\" \"$(SolutionDir)%{editorOutputDir}\\ScriptingGlue.dll\"",
         }
 
         defines {
@@ -292,6 +297,7 @@ project "JadeScriptRuntime"
     kind "ConsoleApp"
     language "C#"
 
+    editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
     fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -301,9 +307,18 @@ project "JadeScriptRuntime"
         "Microsoft.CodeAnalysis.CSharp:3.7.0"
 	}
 
+    links {
+        "ScriptingGlue"
+	}
+
     files {
         "%{prj.name}/src/**.cs"
     }
+
+    filter "system:windows"
+        postbuildcommands {
+            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.exe\"",
+        }
 
     filter "configurations:Debug"
         runtime "Debug"
