@@ -34,6 +34,12 @@
     <Filter Include="cpp\jade\scenes">
       <UniqueIdentifier>{9B78840C-0704-F2D0-1015-75C57C1F4ED1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cpp\jade\scriptingInterop">
+      <UniqueIdentifier>{8EA07F8B-FA62-B315-4313-42A2AF148CF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\jade\scriptingInterop\native">
+      <UniqueIdentifier>{8404D521-7055-C063-99B9-AE25856953CD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="cpp\jade\systems">
       <UniqueIdentifier>{D2AA65D1-BEA3-8423-E7D5-69A8D32D642F}</UniqueIdentifier>
     </Filter>
@@ -136,14 +142,14 @@
     <ClInclude Include="include\externalLibs.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Logger.h">
-      <Filter>include\jade\ScriptingInterop</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Native\Compiler.h">
+    <ClInclude Include="include\jade\ScriptingInterop\Native\Logger.h">
       <Filter>include\jade\ScriptingInterop\Native</Filter>
     </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Test.h">
-      <Filter>include\jade\ScriptingInterop</Filter>
+    <ClInclude Include="include\jade\ScriptingInterop\Native\ScriptRuntime.h">
+      <Filter>include\jade\ScriptingInterop\Native</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\ScriptingInterop\Native\Test.h">
+      <Filter>include\jade\ScriptingInterop\Native</Filter>
     </ClInclude>
     <ClInclude Include="include\jade\commands\ChangeEnumCommand.h">
       <Filter>include\jade\commands</Filter>
@@ -1613,6 +1619,12 @@
     </ClCompile>
     <ClCompile Include="cpp\jade\scenes\Scene.cpp">
       <Filter>cpp\jade\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scriptingInterop\native\Logger.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scriptingInterop\native\ScriptRuntime.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
     </ClCompile>
     <ClCompile Include="cpp\jade\systems\RenderSystem.cpp">
       <Filter>cpp\jade\systems</Filter>

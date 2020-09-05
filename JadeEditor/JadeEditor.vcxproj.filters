@@ -22,6 +22,12 @@
     <Filter Include="include\Gui">
       <UniqueIdentifier>{5D4FC031-C904-3927-52F9-32FEBEAD2F2B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\ScriptingInterop">
+      <UniqueIdentifier>{0C8AB7B5-F8AE-0636-21FA-EBC50D7E0554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\ScriptingInterop\Native">
+      <UniqueIdentifier>{2280AEB0-8E63-BDF0-9766-EB2C03C98341}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\Util">
       <UniqueIdentifier>{76E4D169-6247-610E-0BCD-99C4F70E2D91}</UniqueIdentifier>
     </Filter>
@@ -71,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="include\ProjectWizard.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptingInterop\Native\ScriptCompiler.h">
+      <Filter>include\ScriptingInterop\Native</Filter>
     </ClInclude>
     <ClInclude Include="include\Util\Settings.h">
       <Filter>include\Util</Filter>

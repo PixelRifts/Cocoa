@@ -5,12 +5,9 @@
 #include "jade/core/Entity.h"
 #include "jade/components/Transform.h"
 
-#include "jade/ScriptingInterop/Test.h"
-#include "jade/ScriptingInterop/Logger.h"
+#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
 
 #include <nlohmann/json.hpp>
-#include <mono/jit/jit.h>
-#include <mono/metadata/assembly.h>
 
 namespace Jade
 {
@@ -128,28 +125,7 @@ namespace Jade
 
 	void Scene::Load(const JPath& filename)
 	{
-
-		mono_set_dirs("C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\lib", "C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\etc");
-
-		MonoDomain* domain = mono_jit_init("JadeEngineScriptRuntime");
-		JPath testFile = "C:/dev/C#/Pacman/bin/Windows/x86/Debug/Pacman.exe";
-		MonoImageOpenStatus status;
-		MonoAssembly* assembly = mono_assembly_open("C:\\dev\\C++\\JadeEngine\\bin\\Debug-windows-x86_64\\JadeScriptRuntime\\JadeScriptRuntime.exe", &status);
-		if (!assembly)
-		{
-			Log::Error("Failed to load mono file: %s", testFile.Filepath());
-		}
-
-		mono_add_internal_call("JadeScriptRuntime.Jade::Init", &Interop::Init);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogWarning", &Interop::_LogWarning);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogError", &Interop::_LogError);
-
-		int argc = 1;
-		char* argv[1] = { (char*)"MyDomain" };
-		int returnVal = mono_jit_exec(domain, assembly, argc, argv);
-
-		Interop::TestCall();
+		ScriptRuntime::Init();
 
 		Reset();
 

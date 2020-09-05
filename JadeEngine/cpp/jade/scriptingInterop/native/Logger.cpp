@@ -5,27 +5,27 @@
 #include <mono/metadata/assembly.h>
 #include <mono/jit/jit.h>
 
-namespace Jade 
+namespace Jade
 {
 	namespace Interop
 	{
-		extern "C" 
+		extern "C"
 		{
-			JADE void _LogInfo(MonoString* message)
+			void _LogInfo(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
 				Log::Info(str);
 				mono_free(str);
 			}
 
-			JADE void _LogWarning(MonoString* message)
+			void _LogWarning(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
 				Log::Warning(str);
 				mono_free(str);
 			}
 
-			JADE void _LogError(MonoString* message)
+			void _LogError(MonoString* message)
 			{
 				char* str = mono_string_to_utf8(message);
 				Log::ScriptError(str);
