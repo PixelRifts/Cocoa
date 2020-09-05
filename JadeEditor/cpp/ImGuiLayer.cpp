@@ -32,7 +32,6 @@
 
 namespace Jade
 {
-	static void LoadStyle(const JPath& filepath);
 	void HelpMarker(const char* desc);
 
 	ImVec4 From(const glm::vec4& vec4)
@@ -277,10 +276,10 @@ namespace Jade
 		ImGui::PopStyleColor(5);
 		ImGui::End();
 	}
-
-	void LoadStyle(const JPath& filepath)
+	
+	void ImGuiLayer::LoadStyle(const JPath& filepath)
 	{
-		File* styleData = IFile::OpenFile(Settings::General::s_EditorStyleData);
+		File* styleData = IFile::OpenFile(filepath);
 		if (styleData->m_Data.size() > 0)
 		{
 			json j = json::parse(styleData->m_Data);
