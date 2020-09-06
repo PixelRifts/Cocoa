@@ -11,9 +11,9 @@ namespace Jade
 	{
 		extern "C" 
 		{
-			JADE void _LogInfo1(MonoString* message);
-			JADE void _LogWarning1(MonoString* message);
-			JADE void _LogError1(MonoString* message);
+			void JADE _LogInfo(const char* message);
+			void JADE _LogWarning(const char* message);
+			void JADE _LogError(const char* message);
 		}
 	}
 }

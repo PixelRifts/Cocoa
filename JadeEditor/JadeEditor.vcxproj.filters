@@ -10,6 +10,12 @@
     <Filter Include="cpp\Gui">
       <UniqueIdentifier>{3C9ECCD5-A87D-4B71-B195-D6471DF4B1D2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cpp\ScriptingInterop">
+      <UniqueIdentifier>{4BCBC4BB-375A-4E85-E078-6280CCE65E2B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\ScriptingInterop\Native">
+      <UniqueIdentifier>{81045CA1-ED11-8A87-76F8-8572E204563E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="cpp\Util">
       <UniqueIdentifier>{350F688F-21DC-C29A-4AF5-B0423621F828}</UniqueIdentifier>
     </Filter>
@@ -124,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="cpp\ProjectWizard.cpp">
       <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\ScriptingInterop\Native\ScriptCompiler.cpp">
+      <Filter>cpp\ScriptingInterop\Native</Filter>
     </ClCompile>
     <ClCompile Include="cpp\Util\Settings.cpp">
       <Filter>cpp\Util</Filter>

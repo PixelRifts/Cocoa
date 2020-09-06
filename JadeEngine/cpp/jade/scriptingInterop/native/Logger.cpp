@@ -11,25 +11,19 @@ namespace Jade
 	{
 		extern "C"
 		{
-			void _LogInfo1(MonoString* message)
+			void JADE _LogInfo(const char* message)
 			{
-				char* str = mono_string_to_utf8(message);
-				Log::Info(str);
-				mono_free(str);
+				Log::Info(message);
 			}
 
-			void _LogWarning1(MonoString* message)
+			void JADE _LogWarning(const char* message)
 			{
-				char* str = mono_string_to_utf8(message);
-				Log::Warning(str);
-				mono_free(str);
+				Log::Warning(message);
 			}
 
-			void _LogError1(MonoString* message)
+			void JADE _LogError(const char* message)
 			{
-				char* str = mono_string_to_utf8(message);
-				Log::ScriptError(str);
-				mono_free(str);
+				Log::ScriptError(message);
 			}
 		}
 	}

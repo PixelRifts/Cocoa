@@ -7,7 +7,7 @@
 
 namespace Jade
 {
-	class ScriptRuntime
+	class JADE ScriptRuntime
 	{
 	public:
 		static void Init();
@@ -16,8 +16,9 @@ namespace Jade
 		static MonoAssembly* OpenCSharpExe(JPath pathToExe);
 		static void CallCSharpMethod(MonoAssembly* assembly, MonoClass* klazz, const std::string& methodName);
 
-	private:
-		static void AddInternalCallsToCSharp();
+		static void ExecuteScriptableComponent(const JPath& path);
+
 		static MonoDomain* s_Domain;
+	private:
 	};
 }

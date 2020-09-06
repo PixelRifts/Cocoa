@@ -1,6 +1,9 @@
 #include "jade/ScriptingInterop/Native/ScriptRuntime.h"
 #include "jade/ScriptingInterop/Native/Test.h"
 #include "jade/ScriptingInterop/Native/Logger.h"
+#include "jade/components/ScriptableComponent.h"
+
+#include <mono/metadata/debug-helpers.h>
 
 namespace Jade
 {
@@ -12,7 +15,6 @@ namespace Jade
 
 		s_Domain = mono_jit_init("JadeEngineScriptRuntime");
 		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptRuntime.exe";
-		AddInternalCallsToCSharp();
 		MonoAssembly* assembly = OpenCSharpExe(scriptRuntime);
 
 		int argc = 1;
@@ -27,27 +29,60 @@ namespace Jade
 
 	MonoAssembly* ScriptRuntime::OpenCSharpExe(JPath pathToExe)
 	{
-		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptRuntime.exe";
 		MonoImageOpenStatus status;
-		MonoAssembly* assembly = mono_assembly_open(scriptRuntime.Filepath(), &status);
+		MonoAssembly* assembly = mono_assembly_open(pathToExe.Filepath(), &status);
 		if (!assembly)
 		{
-			Log::Error("Failed to load compiled C# file: %s", scriptRuntime.Filepath());
+			Log::Error("Failed to load compiled C# file: %s", pathToExe.Filepath());
 		}
 
 		return assembly;
 	}
 
+	void ScriptRuntime::ExecuteScriptableComponent(const JPath& path)
+	{
+		MonoAssembly* assembly = mono_domain_assembly_open(s_Domain, path.Filepath());
+		if (!assembly)
+		{
+			Log::ScriptError("Failed to load assembly for script dll.");
+			return;
+		}
+
+		MonoImageOpenStatus status;
+		MonoImage* s_CompilerImage = mono_assembly_get_image(assembly);
+
+		if (!s_CompilerImage)
+		{
+			Log::ScriptError("Failed to open script dll.");
+			return;
+		}
+
+		MonoClass* klazz = mono_class_from_name(s_CompilerImage, "JadeScriptRuntime", "RandomComponent");
+		MonoObject* obj = mono_object_new(s_Domain, klazz);
+		void* iter = nullptr;
+		MonoMethod* m = nullptr;
+		MonoClass* parent = mono_class_get_parent(klazz);
+
+		MonoMethodDesc* bindDesc = mono_method_desc_new(":ToString()", false);
+		MonoMethod* bindMethod = mono_class_get_method_from_name(parent, "BindFunctions", 1);
+		mono_method_desc_free(bindDesc);
+
+		if (!bindMethod)
+		{
+			Log::ScriptError("Failed to find BindFunctions method in C# script.");
+			return;
+		}
+
+		ScriptableComponent* testComp = new ScriptableComponent();
+		void* args[1]{&testComp};
+		mono_runtime_invoke(bindMethod, obj, args, nullptr);
+
+		testComp->Start();
+		testComp->Update(0.5f);
+	}
+
 	void ScriptRuntime::CallCSharpMethod(MonoAssembly* assembly, MonoClass* klazz, const std::string& methodName)
 	{
 		Log::Warning("TODO: Implement me!");
-	}
-
-	void ScriptRuntime::AddInternalCallsToCSharp()
-	{
-		//mono_add_internal_call("JadeScriptRuntime.Jade::Init", &Interop::Init);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogInfo", &Interop::_LogInfo1);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogWarning", &Interop::_LogWarning1);
-		mono_add_internal_call("JadeScriptRuntime.Debug::_LogError", &Interop::_LogError1);
 	}
 }

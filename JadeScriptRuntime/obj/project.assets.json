@@ -423,72 +423,6 @@
         "runtime": {
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
-      },
-      "Box2D/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Box2D.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Box2D.dll": {}
-        }
-      },
-      "Glad/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Glad.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Glad.dll": {}
-        }
-      },
-      "GLFW/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/GLFW.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GLFW.dll": {}
-        }
-      },
-      "ImGui/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ImGui.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ImGui.dll": {}
-        }
-      },
-      "JadeEngine/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/JadeEngine.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JadeEngine.dll": {}
-        }
-      },
-      "ScriptingGlue/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0",
-          "ImGui": "1.0.0",
-          "JadeEngine": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        }
       }
     },
     ".NETFramework,Version=v4.7.2/win": {
@@ -906,72 +840,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
-        }
-      },
-      "Box2D/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Box2D.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Box2D.dll": {}
-        }
-      },
-      "Glad/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Glad.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Glad.dll": {}
-        }
-      },
-      "GLFW/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/GLFW.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GLFW.dll": {}
-        }
-      },
-      "ImGui/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ImGui.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ImGui.dll": {}
-        }
-      },
-      "JadeEngine/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/JadeEngine.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JadeEngine.dll": {}
-        }
-      },
-      "ScriptingGlue/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0",
-          "ImGui": "1.0.0",
-          "JadeEngine": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ScriptingGlue.dll": {}
         }
       }
     },
@@ -1391,72 +1259,6 @@
         "runtime": {
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
-      },
-      "Box2D/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Box2D.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Box2D.dll": {}
-        }
-      },
-      "Glad/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Glad.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Glad.dll": {}
-        }
-      },
-      "GLFW/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/GLFW.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GLFW.dll": {}
-        }
-      },
-      "ImGui/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ImGui.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ImGui.dll": {}
-        }
-      },
-      "JadeEngine/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/JadeEngine.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JadeEngine.dll": {}
-        }
-      },
-      "ScriptingGlue/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0",
-          "ImGui": "1.0.0",
-          "JadeEngine": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        }
       }
     },
     ".NETFramework,Version=v4.7.2/win-x86": {
@@ -1874,72 +1676,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
-        }
-      },
-      "Box2D/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Box2D.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Box2D.dll": {}
-        }
-      },
-      "Glad/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Glad.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Glad.dll": {}
-        }
-      },
-      "GLFW/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/GLFW.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GLFW.dll": {}
-        }
-      },
-      "ImGui/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ImGui.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ImGui.dll": {}
-        }
-      },
-      "JadeEngine/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/JadeEngine.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/JadeEngine.dll": {}
-        }
-      },
-      "ScriptingGlue/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Box2D": "1.0.0",
-          "GLFW": "1.0.0",
-          "Glad": "1.0.0",
-          "ImGui": "1.0.0",
-          "JadeEngine": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ScriptingGlue.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ScriptingGlue.dll": {}
         }
       }
     }
@@ -2589,43 +2325,12 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "Box2D/1.0.0": {
-      "type": "project",
-      "path": "../JadeEngine/vendor/box2DVendor/Box2D.vcxproj",
-      "msbuildProject": "../JadeEngine/vendor/box2DVendor/Box2D.vcxproj"
-    },
-    "Glad/1.0.0": {
-      "type": "project",
-      "path": "../JadeEngine/vendor/glad/Glad.vcxproj",
-      "msbuildProject": "../JadeEngine/vendor/glad/Glad.vcxproj"
-    },
-    "GLFW/1.0.0": {
-      "type": "project",
-      "path": "../JadeEngine/vendor/GLFW/GLFW.vcxproj",
-      "msbuildProject": "../JadeEngine/vendor/GLFW/GLFW.vcxproj"
-    },
-    "ImGui/1.0.0": {
-      "type": "project",
-      "path": "../JadeEngine/vendor/imguiVendor/ImGui.vcxproj",
-      "msbuildProject": "../JadeEngine/vendor/imguiVendor/ImGui.vcxproj"
-    },
-    "JadeEngine/1.0.0": {
-      "type": "project",
-      "path": "../JadeEngine/JadeEngine.vcxproj",
-      "msbuildProject": "../JadeEngine/JadeEngine.vcxproj"
-    },
-    "ScriptingGlue/1.0.0": {
-      "type": "project",
-      "path": "../ScriptingGlue/ScriptingGlue.vcxproj",
-      "msbuildProject": "../ScriptingGlue/ScriptingGlue.vcxproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "Microsoft.CodeAnalysis.CSharp >= 3.7.0",
-      "Microsoft.CodeAnalysis.CSharp.Workspaces >= 3.7.0",
-      "ScriptingGlue >= 1.0.0"
+      "Microsoft.CodeAnalysis.CSharp.Workspaces >= 3.7.0"
     ]
   },
   "packageFolders": {
@@ -2654,11 +2359,7 @@
       },
       "frameworks": {
         "net472": {
-          "projectReferences": {
-            "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj": {
-              "projectPath": "C:\\dev\\C++\\JadeEngine\\ScriptingGlue\\ScriptingGlue.vcxproj"
-            }
-          }
+          "projectReferences": {}
         }
       }
     },

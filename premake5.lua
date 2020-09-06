@@ -73,6 +73,7 @@ project "JadeEngine"
 	}
 
 	links {
+        "JadeScriptRuntime",
 		"GLFW",
         "opengl32.lib",
         "Glad",
@@ -160,13 +161,13 @@ project "JadeEditor"
 
     links {
         "JadeEngine",
-        "JadeScriptRuntime",
-        "ScriptingGlue",
         "ImGui",
 		"GLFW",
         "opengl32.lib",
         "Glad",
         "Box2D",
+        "JadeScriptCompiler",
+        "JadeEngine/vendor/monoVendor/lib/mono-2.0-sgen.lib",
     }
 
     filter { "system:windows", "configurations:Debug" }
@@ -207,90 +208,6 @@ project "JadeEditor"
         optimize "on"
 
 
-project "ScriptingGlue"
-    location "ScriptingGlue"
-    kind "SharedLib"
-    language "C++"
-    cppdialect "C++17"	
-    staticruntime "off"
-
-    fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
-    editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files {
-        "%{prj.name}/include/**.h",
-        "%{prj.name}/cpp/**.cpp"
-    }
-
-    disablewarnings { 
-        "4251" 
-    }
-
-    includedirs {
-        "JadeEngine",
-        "JadeEngine/include",
-        "JadeEngine/vendor",
-        "%{prj.name}/include",
-        "%{IncludeDir.glm}",
-        "%{IncludeDir.entt}",
-        "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}",
-        "%{IncludeDir.Box2D}",
-        "%{IncludeDir.Json}",
-        "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Mono}",
-    }
-
-    links {
-        "JadeEngine",
-        "ImGui",
-		"GLFW",
-        "opengl32.lib",
-        "Glad",
-        "Box2D",
-        "JadeEngine/vendor/monoVendor/lib/mono-2.0-sgen.lib"
-    }
-
-    filter { "system:windows", "configurations:Debug" }
-        buildoptions "/MDd"        
-
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MD"
-
-    filter "system:windows"
-        systemversion "latest"		
-
-        postbuildcommands {
-            "copy /y \"$(SolutionDir)%{fullOutputDir}\\ScriptingGlue.dll\" \"$(SolutionDir)%{editorOutputDir}\\ScriptingGlue.dll\"",
-        }
-
-        defines {
-            "_JADE_PLATFORM_WINDOWS",
-            "_JADE_DLL"
-        }
-
-    filter "configurations:Debug"
-        defines {
-			"_JADE_DEBUG",
-			"_JADE_ENABLE_ASSERTS"
-		}
-        runtime "Debug"
-        symbols "on"
-
-
-    filter "configurations:Release"
-        defines "_JADE_RELEASE"
-        runtime "Release"
-        optimize "on"
-
-
-    filter "configurations:Dist"
-        defines "_JADE_DIST"
-        runtime "Release"
-        optimize "on"
-
 
 project "JadeScriptRuntime"
     location "JadeScriptRuntime"
@@ -307,8 +224,47 @@ project "JadeScriptRuntime"
         "Microsoft.CodeAnalysis.CSharp:3.7.0"
 	}
 
+    files {
+        "%{prj.name}/src/**.cs"
+    }
+
+    filter "system:windows"
+        postbuildcommands {
+            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.exe\"",
+        }
+
+    filter "configurations:Debug"
+        runtime "Debug"
+        symbols "on"
+
+
+    filter "configurations:Release"
+        runtime "Release"
+        optimize "on"
+
+
+    filter "configurations:Dist"
+        runtime "Release"
+        optimize "on"
+
+
+project "JadeScriptCompiler"
+    location "JadeScriptCompiler"
+    kind "ConsoleApp"
+    language "C#"
+
+    editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
+    fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    nuget {
+        "Microsoft.CodeAnalysis.CSharp.Workspaces:3.7.0",
+        "Microsoft.CodeAnalysis.CSharp:3.7.0"
+	}
+
     links {
-        "ScriptingGlue"
+        "JadeScriptRuntime"
 	}
 
     files {
@@ -317,7 +273,7 @@ project "JadeScriptRuntime"
 
     filter "system:windows"
         postbuildcommands {
-            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.exe\"",
+            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptCompiler.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptCompiler.exe\"",
         }
 
     filter "configurations:Debug"

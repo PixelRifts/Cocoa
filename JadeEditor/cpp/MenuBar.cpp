@@ -7,6 +7,9 @@
 #include "JadeEditorApplication.h"
 #include "Gui/ImGuiExtended.h"
 
+#include "ScriptingInterop/Native/ScriptCompiler.h"
+#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+
 #include "jade/core/Entity.h"
 #include "jade/file/IFileDialog.h"
 #include "jade/components/components.h"
@@ -82,6 +85,16 @@ namespace Jade
 		{
 			if (ImGui::BeginMenu("File"))
 			{
+				if (JImGui::MenuButton("Compile Random Script"))
+				{
+					ScriptCompiler::Compile("C:/dev/C++/JadeEngine/JadeScriptCompiler/src/RandomScript.cs", "C:/dev/C++/JadeEngine/JadeScriptCompiler/src/RandomScript.dll");
+				}
+
+				if (JImGui::MenuButton("Execute Random Script Start then Update once"))
+				{
+					ScriptRuntime::ExecuteScriptableComponent("C:/dev/C++/JadeEngine/JadeScriptCompiler/src/RandomScript.dll");
+				}
+
 				if (JImGui::MenuButton("New Project"))
 				{
 					m_CreatingProject = true;

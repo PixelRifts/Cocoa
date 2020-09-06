@@ -178,6 +178,9 @@
     <ClInclude Include="include\jade\commands\ICommand.h">
       <Filter>include\jade\commands</Filter>
     </ClInclude>
+    <ClInclude Include="include\jade\components\ScriptableComponent.h">
+      <Filter>include\jade\components</Filter>
+    </ClInclude>
     <ClInclude Include="include\jade\components\Transform.h">
       <Filter>include\jade\components</Filter>
     </ClInclude>
@@ -1624,6 +1627,9 @@
       <Filter>cpp\jade\scriptingInterop\native</Filter>
     </ClCompile>
     <ClCompile Include="cpp\jade\scriptingInterop\native\ScriptRuntime.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scriptingInterop\native\ScriptableComponent.cpp">
       <Filter>cpp\jade\scriptingInterop\native</Filter>
     </ClCompile>
     <ClCompile Include="cpp\jade\systems\RenderSystem.cpp">

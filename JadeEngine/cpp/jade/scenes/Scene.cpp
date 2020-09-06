@@ -5,8 +5,6 @@
 #include "jade/core/Entity.h"
 #include "jade/components/Transform.h"
 
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
-
 #include <nlohmann/json.hpp>
 
 namespace Jade
@@ -125,8 +123,6 @@ namespace Jade
 
 	void Scene::Load(const JPath& filename)
 	{
-		ScriptRuntime::Init();
-
 		Reset();
 
 		Settings::General::s_CurrentScene = filename;

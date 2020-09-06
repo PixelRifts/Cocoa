@@ -1,6 +1,7 @@
 #include "Jade.h"
 #include "Gui/ImGuiHeader.h"
 #include "EditorWindows/InspectorWindow.h"
+#include "ScriptingInterop/Native/ScriptCompiler.h"
 
 #include "JadeEditorApplication.h"
 #include "LevelEditorScene.h"
@@ -8,6 +9,7 @@
 #include "jade/file/IFile.h"
 #include "jade/util/Settings.h"
 #include "jade/systems/RenderSystem.h"
+#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
 
 #include <glad/glad.h>
 #include <nlohmann/json.hpp>
@@ -223,6 +225,8 @@ namespace Jade
 		Jade::ProjectWizard::Init();
 		Jade::Physics2D::Init();
 		Jade::Input::Init();
+		Jade::ScriptRuntime::Init();
+		Jade::ScriptCompiler::Init();
 		ChangeScene(new LevelEditorScene());
 
 		m_ImGuiLayer = new ImGuiLayer(m_CurrentScene);

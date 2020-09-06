@@ -13,35 +13,34 @@ namespace JadeScriptRuntime
 		// -------------------------------------------------------
 		// Native code declarations
 		// -------------------------------------------------------
-		[DllImport("ScriptingGlue", EntryPoint = "_LogInfo", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-		//[MethodImpl(MethodImplOptions.InternalCall)]
-		static extern void _LogInfo([MarshalAs(UnmanagedType.LPStr)]string message);
+		[DllImport("JadeEngine", EntryPoint = "_LogInfo", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+		static extern void _LogInfo(
+			[MarshalAs(UnmanagedType.LPStr)]string message);
 
-		[MethodImpl(MethodImplOptions.InternalCall)]
-		static extern void _LogWarning(string message);
+		[DllImport("JadeEngine", EntryPoint = "_LogWarning", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+		static extern void _LogWarning(
+			[MarshalAs(UnmanagedType.LPStr)]string message);
 
-		[MethodImpl(MethodImplOptions.InternalCall)]
-		static extern void _LogError(string message);
+		[DllImport("JadeEngine", EntryPoint = "_LogError", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+		static extern void _LogError(
+			[MarshalAs(UnmanagedType.LPStr)]string message);
 
 		// -------------------------------------------------------
 		// Wrappers around native code calls
 		// -------------------------------------------------------
 		public static void LogInfo(string message)
 		{
-			System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackTrace().GetFrame(1);
-			_LogInfo($"{stackFrame.GetMethod()}: {message}");
+			_LogInfo(message);
 		}
 
 		public static void LogWarning(string message)
 		{
-			System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackTrace().GetFrame(1);
-			_LogWarning($"{stackFrame.GetMethod()}: {message}");
+			_LogWarning(message);
 		}
 
 		public static void LogError(string message)
 		{
-			System.Diagnostics.StackFrame stackFrame = new System.Diagnostics.StackTrace().GetFrame(1);
-			_LogError($"{stackFrame.GetMethod()}: {message}");
+			_LogError(message);
 		}
 	}
 }
