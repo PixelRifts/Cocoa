@@ -41,7 +41,8 @@ namespace Jade
 
 	void ScriptRuntime::ExecuteScriptableComponent(const JPath& path)
 	{
-		MonoAssembly* assembly = mono_domain_assembly_open(s_Domain, path.Filepath());
+		MonoDomain* newDomain = mono_domain_create();
+		MonoAssembly* assembly = mono_domain_assembly_open(newDomain, path.Filepath());
 		if (!assembly)
 		{
 			Log::ScriptError("Failed to load assembly for script dll.");
@@ -58,7 +59,9 @@ namespace Jade
 		}
 
 		MonoClass* klazz = mono_class_from_name(s_CompilerImage, "JadeScriptRuntime", "RandomComponent");
-		MonoObject* obj = mono_object_new(s_Domain, klazz);
+		MonoObject* obj = mono_object_new(newDomain, klazz);
+		mono_runtime_object_init(obj);
+
 		void* iter = nullptr;
 		MonoMethod* m = nullptr;
 		MonoClass* parent = mono_class_get_parent(klazz);
@@ -79,6 +82,9 @@ namespace Jade
 
 		testComp->Start();
 		testComp->Update(0.5f);
+
+		mono_image_close(s_CompilerImage);
+		mono_domain_free(newDomain, true);
 	}
 
 	void ScriptRuntime::CallCSharpMethod(MonoAssembly* assembly, MonoClass* klazz, const std::string& methodName)
