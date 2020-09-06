@@ -14,20 +14,30 @@
 
 namespace Jade
 {
-	AssetWindow::AssetWindow(Scene* scene) 
-		: m_Scene(scene) {}
+	static void PushDarkButtonColors()
+	{
+		ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgActive));
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgHovered));
+		ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_Text));
+		ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled));
+	}
+
+	static void PopDarkButtonColors()
+	{
+		ImGui::PopStyleColor(4);
+	}
+
+	AssetWindow::AssetWindow(Scene* scene)
+		: m_Scene(scene)
+	{
+	}
 
 	void AssetWindow::ImGui()
 	{
 		ImGui::Begin("Assets");
 		ShowMenuBar();
 
-		ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgActive));
-		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_FrameBgHovered));
-		ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_Text));
-		ImGui::PushStyleColor(ImGuiCol_TextDisabled, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled));
-
-		switch (m_CurrentView) 
+		switch (m_CurrentView)
 		{
 		case AssetView::TextureBrowser:
 			ShowTextureBrowser();
@@ -35,12 +45,14 @@ namespace Jade
 		case AssetView::SceneBrowser:
 			ShowSceneBrowser();
 			break;
+		case AssetView::ScriptBrowser:
+			ShowScriptBrowser();
+			break;
 		default:
 			Log::Warning("Unkown asset view: %d", (int)m_CurrentView);
 			break;
 		}
 
-		ImGui::PopStyleColor(4);
 		ImGui::End();
 	}
 
@@ -56,20 +68,26 @@ namespace Jade
 
 	bool AssetWindow::IconButton(const char* icon, const char* label, const glm::vec2& size)
 	{
+		PushDarkButtonColors();
+
 		ImGui::BeginGroup();
 		ImGui::PushFont(Settings::EditorStyle::s_LargeIconFont);
 		bool res = ImGui::Button(icon, ImVec2(size.x, size.y));
 		ImGui::PopFont();
-		
+
 		ImVec2 textSize = ImGui::CalcTextSize(label);
-		ImGui::SetCursorPos(ImGui::GetCursorPos() + ImVec2(size.x / 2.0f, 0.0f) -  ImVec2(textSize.x / 2.0f, 0.0f));
+		ImGui::SetCursorPos(ImGui::GetCursorPos() + ImVec2(size.x / 2.0f, 0.0f) - ImVec2(textSize.x / 2.0f, 0.0f));
 		ImGui::Text(label);
 		ImGui::EndGroup();
+
+		PopDarkButtonColors();
 		return res;
 	}
 
 	bool AssetWindow::ImageButton(Texture* texture, const char* label, const glm::vec2& size)
 	{
+		PushDarkButtonColors();
+
 		ImGui::BeginGroup();
 		ImGui::PushFont(Settings::EditorStyle::s_LargeIconFont);
 		bool res = JImGui::ImageButton(*texture, size);
@@ -79,6 +97,8 @@ namespace Jade
 		ImGui::SetCursorPos(ImGui::GetCursorPos() + ImVec2(size.x / 2.0f, 0.0f) - ImVec2(textSize.x / 2.0f, 0.0f));
 		ImGui::Text(label);
 		ImGui::EndGroup();
+
+		PopDarkButtonColors();
 		return res;
 	}
 
@@ -118,6 +138,51 @@ namespace Jade
 			{
 				AssetManager::LoadTextureFromFile(JPath(result.filepath));
 			}
+		}
+	}
+
+	void AssetWindow::ShowScriptBrowser()
+	{
+		auto scriptFiles = IFile::GetFilesInDir(Settings::General::s_WorkingDirectory + "scripts");
+		int scriptCount = 0;
+		for (auto script : scriptFiles)
+		{
+			ImGui::PushID(scriptCount++);
+			if (IconButton(ICON_FA_FILE, script.Filename(), m_ButtonSize))
+			{
+				Log::Info("Make this function open the file in Visual Studio or some other editor");
+				Log::Warning("TODO: This function is not implemented yet.");
+			}
+			ImGui::SameLine();
+			ImGui::PopID();
+		}
+
+		static bool creatingScript = false;
+		if (IconButton(ICON_FA_PLUS, "New Script", m_ButtonSize))
+		{
+			creatingScript = true;
+			ImGui::OpenPopup("new script menu", 1);
+		}
+
+		if (ImGui::BeginPopup("new script menu"))
+		{
+			static char scriptName[128] = {};
+			ImGui::InputText("Script Name: ", scriptName, 124);
+			if (JImGui::Button("Create"))
+			{
+				JPath newFilePath = Settings::General::s_WorkingDirectory + "scripts";
+				if (!IFile::CopyFile(Settings::EditorVariables::s_DefaultScriptLocation, newFilePath, scriptName))
+				{
+					Log::Warning("Failed to create script: '%s'", newFilePath.Filepath());
+				}
+				else
+				{
+					creatingScript = false;
+					ImGui::CloseCurrentPopup();
+				}
+			}
+
+			ImGui::EndPopup();
 		}
 	}
 

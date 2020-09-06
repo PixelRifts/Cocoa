@@ -2,6 +2,7 @@
 #include "Gui/ImGuiHeader.h"
 #include "EditorWindows/InspectorWindow.h"
 #include "ScriptingInterop/Native/ScriptCompiler.h"
+#include "Util/Settings.h"
 
 #include "JadeEditorApplication.h"
 #include "LevelEditorScene.h"
@@ -144,6 +145,7 @@ namespace Jade
 
 		Settings::General::s_EditorSaveData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorSaveData;
 		Settings::General::s_EditorStyleData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorStyleData;
+		Settings::EditorVariables::s_DefaultScriptLocation = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::EditorVariables::s_DefaultScriptLocation;
 
 		LoadEditorData(Settings::General::s_EditorSaveData);
 	}

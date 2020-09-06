@@ -25,6 +25,7 @@ namespace Jade
         bool m_SettingsOpen = false;
         bool m_StyleSelectOpen = false;
         bool m_CreatingProject = false;
+        bool m_DemoWindowOpen = false;
 
         // -------------Settings Variables-------------------------
         int m_GridSize[2] = { Settings::General::s_GridSizeX, Settings::General::s_GridSizeY };

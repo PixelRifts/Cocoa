@@ -47,6 +47,25 @@ namespace Jade
 		return true;
 	}
 
+	bool Win32File::ImplCreateFile(const JPath& filename, const char* extToAppend)
+	{
+		JPath fileToWrite = filename;
+		if (filename.FileExt() == nullptr || filename.FileExt()[0] == '\0')
+		{
+			fileToWrite = JPath(filename.Filepath() + std::string(extToAppend));
+		}
+		HANDLE fileHandle = CreateFileA(fileToWrite.Filepath(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		bool res = fileHandle != INVALID_HANDLE_VALUE;
+		CloseHandle(fileHandle);
+		return res;
+	}
+
+	bool Win32File::ImplCopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename)
+	{
+		JPath newFilepath = newFileLocation + (std::string(newFilename) + fileToCopy.FileExt());
+		return CopyFileExA(fileToCopy.Filepath(), newFilepath.Filepath(), NULL, NULL, false, NULL);
+	}
+
 	JPath Win32File::ImplGetCwd()
 	{
 		char buff[FILENAME_MAX];

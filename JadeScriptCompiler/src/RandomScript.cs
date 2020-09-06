@@ -1,17 +1,14 @@
-﻿
+﻿using JadeScriptRuntime;
 
-namespace JadeScriptRuntime
+public class RandomComponent : ScriptableComponent
 {
-	class RandomComponent : ScriptableComponent
+	public override void Start()
 	{
-		public override void Start()
-		{
-			Debug.LogInfo("Now I'm changing the value at runtime.... OMGGGGG");
-		}
+		Debug.LogInfo("Now I'm changing the value at runtime.");
+	}
 
-		override public void Update(float dt)
-		{
-			Debug.LogInfo($"Updating Random Component, dt: {dt}");
-		}
+	override public void Update(float dt)
+	{
+		Debug.LogInfo($"Updating Random Component, dt: {dt}");
 	}
 }

@@ -78,6 +78,13 @@ namespace Jade
 			ImGui::PopStyleVar();
 		}
 
+		if (m_DemoWindowOpen)
+		{
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
+			ImGui::ShowDemoWindow(&m_DemoWindowOpen);
+			ImGui::PopStyleVar();
+		}
+
 		ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_MenuBarButtonBg));
 		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImGui::GetStyleColorVec4(ImGuiCol_MenuBarButtonBgHover));
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImGui::GetStyleColorVec4(ImGuiCol_MenuBarButtonBgActive));
@@ -137,7 +144,7 @@ namespace Jade
 
 				if (JImGui::MenuButton("Show Demo Window"))
 				{
-					m_Scene->ShowDemoWindow();
+					m_DemoWindowOpen = true;
 				}
 
 				ImGui::EndMenu();

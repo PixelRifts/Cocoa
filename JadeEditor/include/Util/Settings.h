@@ -7,6 +7,12 @@ namespace Jade
 {
 	namespace Settings
 	{
+        class EditorVariables
+        {
+        public:
+            static JPath s_DefaultScriptLocation;
+        };
+
         class EditorStyle
         {
         public:

@@ -21,6 +21,8 @@ namespace Jade
 		static File* OpenFile(const JPath& filename) { return Get()->ImplOpenFile(filename); }
 		static void CloseFile(File* file) { Get()->ImplCloseFile(file); }
 		static bool WriteFile(const char* data, const JPath& filename) { return Get()->ImplWriteFile(data, filename); }
+		static bool CreateFile(const JPath& filename, const char* extToAppend = "") { return Get()->ImplCreateFile(filename, extToAppend); }
+		static bool CopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename = "") { return Get()->ImplCopyFile(fileToCopy, newFileLocation, newFilename); }
 		static JPath GetCwd() { return Get()->ImplGetCwd(); }
 		static JPath GetSpecialAppFolder() { return Get()->ImplGetSpecialAppFolder(); }
 		static std::vector<JPath> GetFilesInDir(const JPath& directory) { return Get()->ImplGetFilesInDir(directory); }
@@ -34,6 +36,8 @@ namespace Jade
 		virtual File* ImplOpenFile(const JPath& filename) = 0;
 		virtual void ImplCloseFile(File* file) = 0;
 		virtual bool ImplWriteFile(const char* data, const JPath& filename) = 0;
+		virtual bool ImplCreateFile(const JPath& filename, const char* extToAppend) = 0;
+		virtual bool ImplCopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename) = 0;
 		virtual JPath ImplGetCwd() = 0;
 		virtual JPath ImplGetSpecialAppFolder() = 0;
 		virtual std::vector<JPath> ImplGetFilesInDir(const JPath& directory) = 0;
@@ -62,6 +66,8 @@ namespace Jade
 		virtual File* ImplOpenFile(const JPath& filename) override;
 		virtual void ImplCloseFile(File* file) override;
 		virtual bool ImplWriteFile(const char* data, const JPath& filename) override;
+		virtual bool ImplCreateFile(const JPath& filename, const char* extToAppend) override;
+		virtual bool ImplCopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename) override;
 		virtual JPath ImplGetCwd() override;
 		virtual JPath ImplGetSpecialAppFolder() override;
 		virtual std::vector<JPath> ImplGetFilesInDir(const JPath& directory) override;

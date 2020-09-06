@@ -36,13 +36,11 @@ namespace Jade
 
 		// TODO: TEMPORARY GET BETTER SYSTEM THAN THESE!!!
 		inline json& GetSaveDataJson() { return m_SaveDataJson; }
-		inline void ShowDemoWindow() { m_ShowDemoWindow = true; }
 
 	protected:
 		void LoadDefaultAssets();
 
 	protected:
-		bool m_ShowDemoWindow = false;
 		bool m_IsRunning = false;
 		std::vector<std::unique_ptr<System>> m_Systems;
 
