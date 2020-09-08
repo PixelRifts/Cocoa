@@ -186,4 +186,38 @@ namespace Jade
 	{
 		return (GetFileAttributesA(filepath.Filepath()) & FILE_ATTRIBUTE_DIRECTORY);
 	}
+
+	bool Win32File::ImplRunProgram(const JPath& pathToExe, const char* cmdArguments)
+	{
+		//STARTUPINFOA startupInfo;
+		//PROCESS_INFORMATION processInfo;
+
+		//ZeroMemory(&startupInfo, sizeof(startupInfo));
+		//startupInfo.cb = sizeof(startupInfo);
+		//ZeroMemory(&processInfo, sizeof(processInfo));
+
+		//// Star the program
+		//bool res = CreateProcessA(pathToExe.Filepath(),
+		//	(LPSTR)cmdArguments,
+		//	NULL,
+		//	NULL,
+		//	FALSE,
+		//	0,
+		//	NULL,
+		//	NULL,
+		//	&startupInfo,
+		//	&processInfo
+		//);
+
+		//if (res)
+		//{
+		//	// Close process and thread handles
+		//	CloseHandle(processInfo.hProcess);
+		//	CloseHandle(processInfo.hThread);
+		//}
+
+		bool res = ShellExecuteA(NULL, "open", pathToExe.Filepath(), cmdArguments, "", SW_SHOW);
+
+		return res;
+	}
 }

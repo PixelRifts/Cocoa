@@ -11,6 +11,7 @@ namespace Jade
         {
         public:
             static JPath s_DefaultScriptLocation;
+            static JPath s_CodeEditorExe;
         };
 
         class EditorStyle

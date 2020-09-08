@@ -146,6 +146,7 @@ namespace Jade
 		Settings::General::s_EditorSaveData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorSaveData;
 		Settings::General::s_EditorStyleData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorStyleData;
 		Settings::EditorVariables::s_DefaultScriptLocation = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::EditorVariables::s_DefaultScriptLocation;
+		Settings::EditorVariables::s_CodeEditorExe = IFile::GetSpecialAppFolder() + ".." + "Local" + "Programs" + "Microsoft VS Code" + Settings::EditorVariables::s_CodeEditorExe;
 
 		LoadEditorData(Settings::General::s_EditorSaveData);
 	}

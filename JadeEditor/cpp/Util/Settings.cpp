@@ -8,6 +8,7 @@ namespace Jade
         // Editor Variables
         // =======================================================================
         JPath EditorVariables::s_DefaultScriptLocation = "DefaultScript.cs";
+        JPath EditorVariables::s_CodeEditorExe = "Code.exe";
 
         // =======================================================================
         // Editor Style Settings

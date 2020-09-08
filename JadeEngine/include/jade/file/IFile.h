@@ -32,6 +32,9 @@ namespace Jade
 		static bool IsDirectory(const JPath& directory) { return Get()->ImplIsDirectory(directory); }
 		static JPath GetAbsolutePath(const JPath& path) { return Get()->ImplGetAbsolutePath(path); }
 
+		static bool RunProgram(const JPath& pathToExe, const char* cmdArgs = "") { return Get()->ImplRunProgram(pathToExe, cmdArgs); }
+		static bool RunProgram(const JPath& pathToExe, const std::string& cmdArgs = "") { return Get()->ImplRunProgram(pathToExe, cmdArgs.c_str()); }
+
 	protected:
 		virtual File* ImplOpenFile(const JPath& filename) = 0;
 		virtual void ImplCloseFile(File* file) = 0;
@@ -46,6 +49,8 @@ namespace Jade
 		virtual bool ImplIsFile(const JPath& filepath) = 0;
 		virtual bool ImplIsDirectory(const JPath& filepath) = 0;
 		virtual JPath ImplGetAbsolutePath(const JPath& path) = 0;
+		
+		virtual bool ImplRunProgram(const JPath& pathToExe, const char* cmdArgs) = 0;
 
 	private:
 		static IFile* Get();
@@ -76,6 +81,8 @@ namespace Jade
 		virtual bool ImplIsFile(const JPath& filepath) override;
 		virtual bool ImplIsDirectory(const JPath& filepath) override;
 		virtual JPath ImplGetAbsolutePath(const JPath& path) override;
+
+		virtual bool ImplRunProgram(const JPath& pathToExe, const char* cmdArgs) override;
 	};
 #endif
 }

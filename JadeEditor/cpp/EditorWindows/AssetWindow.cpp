@@ -143,15 +143,17 @@ namespace Jade
 
 	void AssetWindow::ShowScriptBrowser()
 	{
-		auto scriptFiles = IFile::GetFilesInDir(Settings::General::s_WorkingDirectory + "scripts");
+		auto scriptDir = Settings::General::s_WorkingDirectory + "scripts";
+		auto scriptFiles = IFile::GetFilesInDir(scriptDir);
 		int scriptCount = 0;
 		for (auto script : scriptFiles)
 		{
 			ImGui::PushID(scriptCount++);
 			if (IconButton(ICON_FA_FILE, script.Filename(), m_ButtonSize))
 			{
-				Log::Info("Make this function open the file in Visual Studio or some other editor");
-				Log::Warning("TODO: This function is not implemented yet.");
+				std::string cmdToRun = std::string("-g ") + std::string(script.Filepath()) + " -r --add " + scriptDir.Filepath();
+				Log::Info("%s", cmdToRun.c_str());
+				IFile::RunProgram(Settings::EditorVariables::s_CodeEditorExe, cmdToRun);
 			}
 			ImGui::SameLine();
 			ImGui::PopID();

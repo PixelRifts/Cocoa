@@ -58,7 +58,7 @@ namespace Jade
 			return;
 		}
 
-		MonoClass* klazz = mono_class_from_name(s_CompilerImage, "JadeScriptRuntime", "RandomComponent");
+		MonoClass* klazz = mono_class_from_name(s_CompilerImage, "", "RandomComponent");
 		MonoObject* obj = mono_object_new(newDomain, klazz);
 		mono_runtime_object_init(obj);
 
