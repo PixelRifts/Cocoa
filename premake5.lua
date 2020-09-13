@@ -223,7 +223,8 @@ project "JadeScriptRuntime"
 
     nuget {
         "Microsoft.CodeAnalysis.CSharp.Workspaces:3.7.0",
-        "Microsoft.CodeAnalysis.CSharp:3.7.0"
+        "Microsoft.CodeAnalysis.CSharp:3.7.0",
+        "Microsoft.CodeAnalysis:3.7.0"
 	}
 
     files {
@@ -233,6 +234,7 @@ project "JadeScriptRuntime"
     filter "system:windows"
         postbuildcommands {
             "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.dll\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.dll\"",
+             "xcopy /s /e /q /y /i \"$(SolutionDir)%{fullOutputDir}\\*.dll\" \"$(SolutionDir)%{editorOutputDir}\\\" > nul",
         }
 
     filter "configurations:Debug"
@@ -262,7 +264,8 @@ project "JadeScriptCompiler"
 
     nuget {
         "Microsoft.CodeAnalysis.CSharp.Workspaces:3.7.0",
-        "Microsoft.CodeAnalysis.CSharp:3.7.0"
+        "Microsoft.CodeAnalysis.CSharp:3.7.0",
+        "Microsoft.CodeAnalysis:3.7.0"
 	}
 
     links {
@@ -276,6 +279,7 @@ project "JadeScriptCompiler"
     filter "system:windows"
         postbuildcommands {
             "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptCompiler.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptCompiler.exe\"",
+            "xcopy /s /e /q /y /i \"$(SolutionDir)%{fullOutputDir}\\*.dll\" \"$(SolutionDir)%{editorOutputDir}\\\" > nul",
         }
 
     filter "configurations:Debug"

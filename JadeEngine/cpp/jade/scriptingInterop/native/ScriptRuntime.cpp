@@ -64,7 +64,7 @@ namespace Jade
 		for (auto entity : scriptView)
 		{
 			ScriptableComponent& script = reg.get<ScriptableComponent>(entity);
-			MonoClass* klazz = mono_class_from_name(m_CurrentExecutingImage, "", "MyScript");// script.GetFilepath().Filename());
+			MonoClass* klazz = mono_class_from_name(m_CurrentExecutingImage, "", "MyScript");
 			MonoObject* obj = mono_object_new(m_CurrentExecutingDomain, klazz);
 			mono_runtime_object_init(obj);
 

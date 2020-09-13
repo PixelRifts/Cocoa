@@ -58,6 +58,12 @@ namespace Jade
 		args[2] = monoPathToScriptRuntimeDll;
 
 		//MonoError error;
-		mono_runtime_invoke(s_CompileMethod, nullptr, args, nullptr);
+		MonoArray* res = (MonoArray*)mono_runtime_invoke(s_CompileMethod, nullptr, args, nullptr);
+		uintptr_t arrayLength = mono_array_length(res);
+		for (int i = 0; i < arrayLength; i++)
+		{
+			MonoString* element = mono_array_get(res, MonoString*, i);
+			Log::Info("C++ code says: '%s'", mono_string_to_utf8(element));
+		}
 	}
 }

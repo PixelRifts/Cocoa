@@ -50,6 +50,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ClassCollector.cs" />
     <Compile Include="src\Compiler.cs" />
     <Compile Include="src\RandomScript.cs" />
   </ItemGroup>
@@ -62,6 +63,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0"/>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0"/>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.7.0"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -72,6 +74,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\JadeScriptCompiler.exe" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\JadeScriptCompiler.exe"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\JadeScriptCompiler.exe" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\JadeScriptCompiler.exe"
+xcopy /s /e /q /y /i "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\*.dll" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\" &gt; nul</PostBuildEvent>
   </PropertyGroup>
 </Project>
