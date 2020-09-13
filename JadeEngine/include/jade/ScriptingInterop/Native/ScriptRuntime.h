@@ -3,9 +3,12 @@
 #include "jade/file/JPath.h"
 #include "jade/scenes/Scene.h"
 #include "jade/components/ScriptableComponent.h"
+#include "jade/core/Entity.h"
 
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
+
+#include <nlohmann/json.hpp>
 
 namespace Jade
 {
@@ -23,6 +26,8 @@ namespace Jade
 		void OnSceneStop(Scene& scene);
 
 		static void ExecuteScriptableComponent(const JPath& path);
+		static void Serialize(json& j, const Entity& entity, const ScriptableComponent& script);
+		static void Deserialize(json& j, Entity entity);
 
 		static MonoDomain* s_Domain;
 	private:

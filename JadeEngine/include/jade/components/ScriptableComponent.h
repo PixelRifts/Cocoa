@@ -23,6 +23,7 @@ namespace Jade
 		void SetUpdateFnPt(ScriptUpdateFnPt updateFnPt) { m_ScriptUpdate = updateFnPt; }
 
 		inline const JPath& GetFilepath() { return m_Filepath; }
+		inline const JPath& GetFilepath() const { return m_Filepath; }
 
 		ScriptableComponent& operator=(ScriptableComponent&& other) noexcept
 		{

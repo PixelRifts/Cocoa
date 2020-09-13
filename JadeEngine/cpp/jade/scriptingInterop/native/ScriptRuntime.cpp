@@ -107,6 +107,27 @@ namespace Jade
 		});
 	}
 
+	void ScriptRuntime::Serialize(json& j, const Entity& entity, const ScriptableComponent& script)
+	{
+		json path = { "Path", script.GetFilepath().Filepath() };
+
+		int size = j["Size"];
+		j["Components"][size] = {
+			{"ScriptableComponent", {
+				{"Entity", entity.GetID()},
+				path
+			}}
+		};
+
+		j["Size"] = size + 1;
+	}
+
+	void ScriptRuntime::Deserialize(json& j, Entity entity)
+	{
+		JPath path = j["ScriptableComponent"]["Path"];
+		entity.AddComponent<ScriptableComponent>(path);
+	}
+
 	void ScriptRuntime::ExecuteScriptableComponent(const JPath& path)
 	{
 		MonoDomain* newDomain = mono_domain_create();

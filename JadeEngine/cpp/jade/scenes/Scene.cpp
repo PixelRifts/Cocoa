@@ -86,7 +86,7 @@ namespace Jade
 		OutputArchive output(m_SaveDataJson);
 		entt::snapshot{ m_Registry }
 			.entities(output)
-			.component<Transform, Rigidbody2D, Box2D, SpriteRenderer, AABB>(output);
+			.component<Transform, Rigidbody2D, Box2D, SpriteRenderer, AABB, ScriptableComponent>(output);
 
 		IFile::WriteFile(m_SaveDataJson.dump(4).c_str(), filename);
 	}
@@ -174,6 +174,11 @@ namespace Jade
 			{
 				Entity entity = FindOrCreateEntity(idKey, j["Components"][i]["AABB"]["Entity"], this, m_Registry);
 				Physics2DSystem::DeserializeAABB(j["Components"][i], entity);
+			}
+			else if (!j["Components"][i]["ScriptableComponent"].is_null())
+			{
+				Entity entity = FindOrCreateEntity(idKey, j["Components"][i]["ScriptableComponent"]["Entity"], this, m_Registry);
+				ScriptRuntime::Deserialize(j["Components"][i], entity);
 			}
 		}
 

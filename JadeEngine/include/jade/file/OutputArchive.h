@@ -3,6 +3,8 @@
 
 #include "jade/systems/RenderSystem.h"
 #include "jade/physics2d/Physics2DSystem.h"
+#include "jade/components/ScriptableComponent.h"
+#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
 #include "jade/util/Log.h"
 
 #include <nlohmann/json.hpp>
@@ -59,6 +61,12 @@ namespace Jade
 				{
 					const AABB* box = reinterpret_cast<const AABB*>(&component);
 					Physics2DSystem::Serialize(m_Json, entity, *box);
+					break;
+				}
+				case entt::type_info<ScriptableComponent>().id():
+				{
+					const ScriptableComponent* script = reinterpret_cast<const ScriptableComponent*>(&component);
+					ScriptRuntime::Serialize(m_Json, entity, *script);
 					break;
 				}
 				default: 
