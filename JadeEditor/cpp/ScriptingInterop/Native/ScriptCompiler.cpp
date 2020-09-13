@@ -1,5 +1,6 @@
 #include "ScriptingInterop/Native/ScriptCompiler.h"
 #include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+#include "jade/util/Settings.h"
 
 #include <mono/metadata/debug-helpers.h>
 
@@ -34,7 +35,7 @@ namespace Jade
 		}
 
 		MonoClass* klazz = mono_class_from_name(s_CompilerImage, "JadeScriptCompiler", "Compiler");
-		MonoMethodDesc* desc = mono_method_desc_new("JadeScriptCompiler.Compiler:Compile(string,string)", false);
+		MonoMethodDesc* desc = mono_method_desc_new("JadeScriptCompiler.Compiler:Compile(string,string,string)", false);
 		s_CompileMethod = mono_method_desc_search_in_class(desc, klazz);
 		mono_method_desc_free(desc);
 
@@ -44,17 +45,17 @@ namespace Jade
 		}
 	}
 
-	void ScriptCompiler::Compile(const JPath& pathToScript, const JPath& pathToOutput)
+	void ScriptCompiler::Compile(const JPath& pathToScripts, const JPath& pathToOutput)
 	{
-		void* args[2];
+		void* args[3];
 		
-		MonoString* monoInputPath = mono_string_new(s_Domain, pathToScript.Filepath());
+		MonoString* monoPathToScripts = mono_string_new(s_Domain, pathToScripts.Filepath());
 		MonoString* monoOutputPath = mono_string_new(s_Domain, pathToOutput.Filepath());
+		MonoString* monoPathToScriptRuntimeDll = mono_string_new(s_Domain, (Settings::General::s_EngineExecutableDirectory + "JadeScriptRuntime.dll").Filepath());
 
-		args[0] = monoInputPath;
+		args[0] = monoPathToScripts;
 		args[1] = monoOutputPath;
-
-		//mono_runtime_invoke(testMethod, NULL, NULL, NULL);
+		args[2] = monoPathToScriptRuntimeDll;
 
 		//MonoError error;
 		mono_runtime_invoke(s_CompileMethod, nullptr, args, nullptr);

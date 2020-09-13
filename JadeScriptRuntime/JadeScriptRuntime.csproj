@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{32F7832D-9E0D-82C3-E784-0DE553DA524B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JadeScriptRuntime</RootNamespace>
     <AssemblyName>JadeScriptRuntime</AssemblyName>
@@ -50,7 +50,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Compiler.cs" />
     <Compile Include="src\Entity.cs" />
     <Compile Include="src\Jade.cs" />
     <Compile Include="src\Log.cs" />
@@ -71,6 +70,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\JadeScriptRuntime.exe" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\JadeScriptRuntime.exe"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(SolutionDir)bin/Debug-windows-x86_64/$(ProjectName)\JadeScriptRuntime.dll" "$(SolutionDir)bin/Debug-windows-x86_64/JadeEditor\JadeScriptRuntime.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

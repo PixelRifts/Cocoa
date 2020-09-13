@@ -55,6 +55,13 @@ namespace JImGui
 		return res;
 	}
 
+	void Label(const char* labelHeader, const char* label)
+	{
+		ImGui::Text(labelHeader);
+		ImGui::SameLine();
+		ImGui::LabelText(label, "");
+	}
+
 	bool Button(const char* label, const glm::vec2& size)
 	{
 		ImVec4 color = ImGui::GetStyleColorVec4(ImGuiCol_TextInverted);

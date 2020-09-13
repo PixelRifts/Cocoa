@@ -22,6 +22,8 @@ namespace JImGui
 		ImGuiInputTextCallback callback = (ImGuiInputTextCallback)0, void* user_data = (void*)0);
 	bool Checkbox(const char* label, bool* checked);
 
+	void Label(const char* labelHeader, const char* label);
+
 	void UndoableColorEdit4(const char* label, glm::vec4& color);
 	void UndoableColorEdit3(const char* label, glm::vec3& color);
 	void UndoableDragFloat4(const char* label, glm::vec4& vector);

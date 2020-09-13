@@ -10,6 +10,7 @@
 
 namespace Jade
 {
+	class ScriptRuntime;
 	class Entity;
 
 	class JADE Scene
@@ -48,6 +49,9 @@ namespace Jade
 		json m_SaveDataJson;
 
 		Camera* m_Camera;
+
+		// TODO: ABSTRACT THIS INTO A SYSTEM
+		ScriptRuntime* scriptRuntime;
 
 		friend class Entity;
 	};

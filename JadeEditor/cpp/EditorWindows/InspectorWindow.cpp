@@ -10,10 +10,12 @@
 #include "jade/physics2d/Physics2DSystem.h"
 #include "jade/renderer/DebugDraw.h"
 #include "jade/util/JMath.h"
+#include "jade/file/IFile.h"
 
 namespace Jade
 {
 	std::vector<Entity> InspectorWindow::s_ActiveEntities = std::vector<Entity>();
+	bool InspectorWindow::s_GettingScript = false;
 
 	void InspectorWindow::ImGui()
 	{
@@ -30,6 +32,7 @@ namespace Jade
 		bool doAABB = true;
 		bool doBox2D = true;
 		bool doCircle = true;
+		bool doScript = true;
 
 		for (auto& entity : s_ActiveEntities)
 		{
@@ -39,6 +42,7 @@ namespace Jade
 			doAABB &= entity.HasComponent<AABB>();
 			doBox2D &= entity.HasComponent<Box2D>();
 			doCircle &= entity.HasComponent<Circle>();
+			doScript &= entity.HasComponent<ScriptableComponent>();
 		}
 
 		if (doTransform)
@@ -53,6 +57,8 @@ namespace Jade
 			ImGuiAABB(s_ActiveEntities[0].GetComponent<AABB>());
 		if (doCircle)
 			ImGuiCircle(s_ActiveEntities[0].GetComponent<Circle>());
+		if (doScript)
+			ImGuiScriptableComponent(s_ActiveEntities[0].GetComponent<ScriptableComponent>());
 
 		ImGuiAddComponentButton();
 		ImGui::End();
@@ -90,8 +96,8 @@ namespace Jade
 	{
 		Entity activeEntity = s_ActiveEntities[0];
 		int itemPressed = 0;
-		std::array<const char*, 4> components = { "Sprite Renderer", "Rigidbody2D", "BoxCollider2D", "CircleCollider2D" };
-		if (JImGui::ButtonDropdown(ICON_FA_PLUS " Add Component", components.data(), (int)components.size(), itemPressed))
+		std::array<const char*, 5> components = { "Sprite Renderer", "Rigidbody2D", "BoxCollider2D", "CircleCollider2D", "Script" };
+		if (!s_GettingScript && JImGui::ButtonDropdown(ICON_FA_PLUS " Add Component", components.data(), (int)components.size(), itemPressed))
 		{
 			switch (itemPressed)
 			{
@@ -107,7 +113,31 @@ namespace Jade
 			case 3:
 				activeEntity.AddComponent<Circle>();
 				break;
+			case 4:
+				s_GettingScript = true;
+				break;
 			}
+		}
+		else if (s_GettingScript)
+		{
+			ImGuiAddScriptDropdown(activeEntity);
+		}
+	}
+
+	void InspectorWindow::ImGuiAddScriptDropdown(Entity& activeEntity)
+	{
+		int itemPressed = 0;
+		auto scriptDir = Settings::General::s_WorkingDirectory + "scripts";
+		auto scriptFiles = IFile::GetFilesInDir(scriptDir);
+		// TODO: FIX THIS, IT'S UGLY
+		std::vector<const char*> scriptFilesChar;
+		for (int i = 0; i < scriptFiles.size(); i++)
+			scriptFilesChar.push_back(scriptFiles[i].Filename());
+
+		if (JImGui::ButtonDropdown(ICON_FA_PLUS " Choose Script", scriptFilesChar.data(), (int)scriptFilesChar.size(), itemPressed))
+		{
+			activeEntity.AddComponent<ScriptableComponent>(scriptFiles.at(itemPressed));
+			s_GettingScript = false;
 		}
 	}
 
@@ -166,6 +196,27 @@ namespace Jade
 		}
 	}
 
+	// =====================================================================
+	// Scriptable components
+	// =====================================================================
+	void InspectorWindow::ImGuiScriptableComponent(ScriptableComponent& script)
+	{
+		static bool treeNodeOpen = true;
+		ImGui::SetNextTreeNodeOpen(treeNodeOpen);
+		if (ImGui::CollapsingHeader("Script"))
+		{
+			JImGui::BeginCollapsingHeaderGroup();
+
+			if (JImGui::Button("Compile Script"))
+			{
+				Log::Warning("TODO: Implement me to compile script!");
+				
+			}
+			JImGui::Label("Script: ", script.GetFilepath().Filename());
+
+			JImGui::EndCollapsingHeaderGroup();
+		}
+	}
 
 	// =====================================================================
 	// Physics components

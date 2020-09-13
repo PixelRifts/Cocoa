@@ -9,30 +9,28 @@ namespace JadeScriptCompiler
 {
 	class Compiler
 	{
-		static void Compile(string pathToFile, string outputPath)
+		static void Compile(string pathToScripts, string outputPath, string pathToRuntimeDll)
 		{
-			Debug.LogInfo($"Path to File: {pathToFile}");
-			Debug.LogInfo($"Output path: {outputPath}");
 			var codeProvider = new CSharpCodeProvider();
 
 			var parameters = new CompilerParameters();
-			parameters.ReferencedAssemblies.Add("C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeScriptRuntime/JadeScriptRuntime.exe");
+			parameters.ReferencedAssemblies.Add(pathToRuntimeDll);
 
-			var results = codeProvider.CompileAssemblyFromFile(parameters, pathToFile);
+			var scripts = Directory.GetFiles(pathToScripts);
+			var results = codeProvider.CompileAssemblyFromFile(parameters, scripts);
+
 
 			if (results.Errors.Count > 0)
 			{
 				foreach (CompilerError CompError in results.Errors)
 				{
-					Console.WriteLine($"Line Number: {CompError.Line}, Error Number: {CompError.ErrorNumber}, '{CompError.ErrorText}'");
+					Debug.LogError($"File: '{CompError.FileName}'\n\tError Number: {CompError.ErrorNumber}\n\tLine Number: {CompError.Line}, '{CompError.ErrorText}'");
 				}
 			}
 			else
 			{
 				File.Copy(results.PathToAssembly, outputPath, true);
-				Debug.LogInfo($"Output path: {results.PathToAssembly}");
 				File.Delete(results.PathToAssembly);
-
 			}
 		}
 
@@ -43,7 +41,6 @@ namespace JadeScriptCompiler
 
 		static void Main(string[] args)
 		{
-			Debug.LogInfo("Well we can init at least...");
 		}
 	}
 }

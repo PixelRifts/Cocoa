@@ -21,6 +21,7 @@ namespace Jade {
             static JPath s_EditorSaveData;
             static JPath s_EditorStyleData;
             static JPath s_EditorStyle;
+            static JPath s_EngineExecutableDirectory;
         };
   
         class JADE Physics2D

@@ -14,6 +14,7 @@
 #include "jade/util/JMath.h"
 #include "JadeEditorApplication.h"
 #include "jade/util/JsonExtended.h"
+#include "ScriptingInterop/Native/ScriptCompiler.h"
 
 #include <examples/imgui_impl_glfw.h>
 #ifndef _JADE_IMPL_IMGUI
@@ -164,6 +165,9 @@ namespace Jade
 				if (!isPlaying)
 				{
 					m_Scene->Save(Settings::General::s_EngineAssetsPath + "tmp.jade");
+					JPath outputPath = Settings::General::s_EngineExecutableDirectory + "JadeScripts.dll";
+					JPath scriptsDir = Settings::General::s_WorkingDirectory + "scripts";
+					ScriptCompiler::Compile(scriptsDir.Filepath(), outputPath);
 					m_Scene->Play();
 					isPlaying = true;
 				}

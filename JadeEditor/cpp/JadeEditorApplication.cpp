@@ -137,8 +137,10 @@ namespace Jade
 	void EditorLayer::OnAttach()
 	{
 		// Set the assets path as CWD (which should be where the exe is currently located)
-		Settings::General::s_EngineAssetsPath = IFile::GetCwd() + Settings::General::s_EngineAssetsPath;
+		JPath exePath = IFile::GetExecutableDirectory().GetDirectory(-1);
+		Settings::General::s_EngineAssetsPath = exePath + Settings::General::s_EngineAssetsPath;
 		Settings::General::s_ImGuiConfigPath = Settings::General::s_EngineAssetsPath + Settings::General::s_ImGuiConfigPath;
+		Settings::General::s_EngineExecutableDirectory = exePath;
 
 		// Create application store data if it does not exist
 		IFile::CreateDirIfNotExists(IFile::GetSpecialAppFolder() + "JadeEngine");

@@ -75,6 +75,8 @@ namespace Jade
 
 		static void SetScene(Scene* currentScene);
 
+		inline entt::entity GetRaw() { return m_EntityHandle; }
+
 	public:
 		static Entity Null;
 

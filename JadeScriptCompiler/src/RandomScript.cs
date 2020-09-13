@@ -4,7 +4,7 @@ public class RandomComponent : ScriptableComponent
 {
 	public override void Start()
 	{
-		Debug.LogInfo("This is the start method hello.");
+		Debug.LogInfo("This is the start method. Whoops, typo!");
 	}
 
 	override public void Update(float dt)

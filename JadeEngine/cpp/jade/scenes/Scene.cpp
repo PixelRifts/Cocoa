@@ -4,6 +4,7 @@
 #include "jade/util/Settings.h"
 #include "jade/core/Entity.h"
 #include "jade/components/Transform.h"
+#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
 
 #include <nlohmann/json.hpp>
 
@@ -56,6 +57,7 @@ namespace Jade
 
 	void Scene::Play()
 	{
+		scriptRuntime->OnSceneInit(*this);
 		auto view = m_Registry.view<Transform>();
 		for (auto entity : view)
 		{
@@ -67,6 +69,7 @@ namespace Jade
 
 	void Scene::Stop()
 	{
+		scriptRuntime->OnSceneStop(*this);
 		Physics2D::Get()->Destroy();
 		m_IsRunning = false;
 	}

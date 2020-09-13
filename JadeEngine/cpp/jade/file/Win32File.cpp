@@ -90,6 +90,15 @@ namespace Jade
 		return JPath("");
 	}
 
+	JPath Win32File::ImplGetExecutableDirectory()
+	{
+		char filepath[MAX_PATH];
+		DWORD res = GetModuleFileNameA(NULL, filepath, MAX_PATH);
+		Log::Assert(res != NULL && res != ERROR_INSUFFICIENT_BUFFER, "Get Executable Directory failed with error code: '%d'", res);
+
+		return JPath(filepath);
+	}
+
 	void Win32File::ImplCreateDirIfNotExists(const JPath& directory)
 	{
 		if (!(CreateDirectoryA(directory.Filepath(), NULL) || ERROR_ALREADY_EXISTS == GetLastError()))
@@ -189,34 +198,37 @@ namespace Jade
 
 	bool Win32File::ImplRunProgram(const JPath& pathToExe, const char* cmdArguments)
 	{
-		//STARTUPINFOA startupInfo;
-		//PROCESS_INFORMATION processInfo;
+		STARTUPINFOA startupInfo;
+		PROCESS_INFORMATION processInfo;
 
-		//ZeroMemory(&startupInfo, sizeof(startupInfo));
-		//startupInfo.cb = sizeof(startupInfo);
-		//ZeroMemory(&processInfo, sizeof(processInfo));
+		ZeroMemory(&startupInfo, sizeof(startupInfo));
+		startupInfo.cb = sizeof(startupInfo);
+		ZeroMemory(&processInfo, sizeof(processInfo));
 
-		//// Star the program
-		//bool res = CreateProcessA(pathToExe.Filepath(),
-		//	(LPSTR)cmdArguments,
-		//	NULL,
-		//	NULL,
-		//	FALSE,
-		//	0,
-		//	NULL,
-		//	NULL,
-		//	&startupInfo,
-		//	&processInfo
-		//);
+		// Start the program
+		bool res = CreateProcessA(
+			pathToExe.Filepath(),  // Application Name
+			(LPSTR)cmdArguments,   // Command Line Args
+			NULL,                  // Process Attributes
+			NULL,                  // Thread Attributes
+			FALSE,                 // Inherit Handles
+			DETACHED_PROCESS,      // Creation Flags
+			NULL,                  // Environment
+			NULL,                  // Current Directory
+			&startupInfo,          // Startup Info
+			&processInfo           // Process Info
+		);
 
-		//if (res)
-		//{
-		//	// Close process and thread handles
-		//	CloseHandle(processInfo.hProcess);
-		//	CloseHandle(processInfo.hThread);
-		//}
-
-		bool res = ShellExecuteA(NULL, "open", pathToExe.Filepath(), cmdArguments, "", SW_SHOW);
+		if (res)
+		{
+			// Close process and thread handles
+			CloseHandle(processInfo.hProcess);
+			CloseHandle(processInfo.hThread);
+		}
+		else
+		{
+			Log::Warning("Unsuccessfully started process '%s'", pathToExe.Filepath());
+		}
 
 		return res;
 	}

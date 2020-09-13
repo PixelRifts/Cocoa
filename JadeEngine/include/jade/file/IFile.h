@@ -25,6 +25,7 @@ namespace Jade
 		static bool CopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename = "") { return Get()->ImplCopyFile(fileToCopy, newFileLocation, newFilename); }
 		static JPath GetCwd() { return Get()->ImplGetCwd(); }
 		static JPath GetSpecialAppFolder() { return Get()->ImplGetSpecialAppFolder(); }
+		static JPath GetExecutableDirectory() { return Get()->ImplGetExecutableDirectory(); }
 		static std::vector<JPath> GetFilesInDir(const JPath& directory) { return Get()->ImplGetFilesInDir(directory); }
 		static std::vector<JPath> GetFoldersInDir(const JPath& directory) { return Get()->ImplGetFoldersInDir(directory); }
 		static void CreateDirIfNotExists(const JPath& directory) { Get()->ImplCreateDirIfNotExists(directory); }
@@ -43,6 +44,7 @@ namespace Jade
 		virtual bool ImplCopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename) = 0;
 		virtual JPath ImplGetCwd() = 0;
 		virtual JPath ImplGetSpecialAppFolder() = 0;
+		virtual JPath ImplGetExecutableDirectory() = 0;
 		virtual std::vector<JPath> ImplGetFilesInDir(const JPath& directory) = 0;
 		virtual std::vector<JPath> ImplGetFoldersInDir(const JPath& directory) = 0;
 		virtual void ImplCreateDirIfNotExists(const JPath& directory) = 0;
@@ -75,6 +77,7 @@ namespace Jade
 		virtual bool ImplCopyFile(const JPath& fileToCopy, const JPath& newFileLocation, const char* newFilename) override;
 		virtual JPath ImplGetCwd() override;
 		virtual JPath ImplGetSpecialAppFolder() override;
+		virtual JPath ImplGetExecutableDirectory() override;
 		virtual std::vector<JPath> ImplGetFilesInDir(const JPath& directory) override;
 		virtual std::vector<JPath> ImplGetFoldersInDir(const JPath& directory) override;
 		virtual void ImplCreateDirIfNotExists(const JPath& directory) override;

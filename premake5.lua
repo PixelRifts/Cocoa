@@ -56,6 +56,7 @@ project "JadeEngine"
         "_CRT_SECURE_NO_WARNINGS",
         "NOMINMAX",
         "_JADE_DLL",
+        "ENTT_API_EXPORT",
         "GLFW_DLL"
 	}
 
@@ -190,7 +191,8 @@ project "JadeEditor"
     filter "configurations:Debug"
         defines {
 			"_JADE_DEBUG",
-			"_JADE_ENABLE_ASSERTS"
+			"_JADE_ENABLE_ASSERTS",
+            "ENTT_API_IMPORT"
 		}
         runtime "Debug"
         symbols "on"
@@ -211,7 +213,7 @@ project "JadeEditor"
 
 project "JadeScriptRuntime"
     location "JadeScriptRuntime"
-    kind "ConsoleApp"
+    kind "SharedLib"
     language "C#"
 
     editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
@@ -230,7 +232,7 @@ project "JadeScriptRuntime"
 
     filter "system:windows"
         postbuildcommands {
-            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.exe\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.exe\"",
+            "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeScriptRuntime.dll\" \"$(SolutionDir)%{editorOutputDir}\\JadeScriptRuntime.dll\"",
         }
 
     filter "configurations:Debug"

@@ -19,6 +19,7 @@ namespace Jade
         JPath General::s_WorkingDirectory = "";
         JPath General::s_EditorSaveData = "EditorSaveData.json";
         JPath General::s_EditorStyleData = "EditorStyle.json";
+        JPath General::s_EngineExecutableDirectory = "";
 
         // =======================================================================
         // Physics Settings
