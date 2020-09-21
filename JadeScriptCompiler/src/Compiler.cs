@@ -34,19 +34,22 @@ namespace JadeScriptCompiler
 				{
 					Debug.LogError($"File: '{CompError.FileName}'\n\tError Number: {CompError.ErrorNumber}\n\tLine Number: {CompError.Line}, '{CompError.ErrorText}'");
 				}
-			} 
+			}
 			else
 			{
 				List<string> res = new List<string>();
 				// Get class names for each file compiled
 				foreach (var script in scripts)
 				{
-					var code = new StreamReader(script).ReadToEnd();
+					StreamReader stream = new StreamReader(script);
+					string code = stream.ReadToEnd();
+					stream.Close();
 					SyntaxTree tree = CSharpSyntaxTree.ParseText(code);
 					CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
 
+					var executableReference = MetadataReference.CreateFromFile(pathToRuntimeDll);
 					var compilation = CSharpCompilation.Create(results.CompiledAssembly.GetName().ToString())
-						.AddReferences(MetadataReference.CreateFromFile(pathToRuntimeDll))
+						.AddReferences(executableReference)
 						.AddSyntaxTrees(tree);
 
 					var baseType = compilation.GetTypeByMetadataName("JadeScriptRuntime.ScriptableComponent");
@@ -63,11 +66,6 @@ namespace JadeScriptCompiler
 			}
 
 			return null;
-		}
-
-		static void DoesItWork()
-		{
-			Debug.LogInfo("Hello there. It does indeed work");
 		}
 
 		static void Main(string[] args)

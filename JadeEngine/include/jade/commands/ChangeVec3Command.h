@@ -16,7 +16,7 @@ namespace Jade
 
         virtual void execute() override
         {
-            m_OldVector = glm::vec3(m_Vector);
+            m_OldVector = glm::vec3(m_Vector); 
             m_Vector.x = m_NewVector.x;
             m_Vector.y = m_NewVector.y;
             m_Vector.z = m_NewVector.z;

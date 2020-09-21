@@ -3,28 +3,25 @@
 #include "jade/util/Settings.h"
 
 #include <mono/metadata/debug-helpers.h>
+#include <mono/metadata/exception.h>
 
 namespace Jade
 {
 	MonoImage* ScriptCompiler::s_CompilerImage = nullptr;
 	MonoMethod* ScriptCompiler::s_CompileMethod = nullptr;
 
-	static MonoMethod* testMethod = nullptr;
 	static MonoDomain* s_Domain = nullptr;
+
 	void ScriptCompiler::Init()
 	{
-		s_Domain = ScriptRuntime::s_Domain;
-		//s_Domain = mono_jit_init("C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptCompiler.exe");
-		
+		s_Domain = mono_domain_create_appdomain("JadeScriptCompiler", NULL);
+		mono_domain_set(s_Domain, false);
+
 		MonoAssembly* assembly = mono_domain_assembly_open(s_Domain, "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptCompiler.exe");
 		if (!assembly)
 		{
 			Log::Error("Failed to load assembly.");
 		}
-
-		int argc = 1;
-		char* argv[1] = { (char*)"MyDomain" };
-		mono_jit_exec(s_Domain, assembly, argc, argv);
 
 		MonoImageOpenStatus status;
 		s_CompilerImage = mono_assembly_get_image(assembly);
@@ -47,8 +44,9 @@ namespace Jade
 
 	void ScriptCompiler::Compile(const JPath& pathToScripts, const JPath& pathToOutput)
 	{
+		Init();
 		void* args[3];
-		
+
 		MonoString* monoPathToScripts = mono_string_new(s_Domain, pathToScripts.Filepath());
 		MonoString* monoOutputPath = mono_string_new(s_Domain, pathToOutput.Filepath());
 		MonoString* monoPathToScriptRuntimeDll = mono_string_new(s_Domain, (Settings::General::s_EngineExecutableDirectory + "JadeScriptRuntime.dll").Filepath());
@@ -57,13 +55,26 @@ namespace Jade
 		args[1] = monoOutputPath;
 		args[2] = monoPathToScriptRuntimeDll;
 
-		//MonoError error;
+		MonoError error;
 		MonoArray* res = (MonoArray*)mono_runtime_invoke(s_CompileMethod, nullptr, args, nullptr);
-		uintptr_t arrayLength = mono_array_length(res);
-		for (int i = 0; i < arrayLength; i++)
+
+		if (res != nullptr)
 		{
-			MonoString* element = mono_array_get(res, MonoString*, i);
-			Log::Info("C++ code says: '%s'", mono_string_to_utf8(element));
+			uintptr_t arrayLength = mono_array_length(res);
+			for (int i = 0; i < arrayLength; i++)
+			{
+				MonoString* element = mono_array_get(res, MonoString*, i);
+				char* cStr = mono_string_to_utf8(element);
+				Log::Info("C++ code says: '%s'", cStr);
+				mono_free(cStr);
+			}
+		}
+
+		MonoDomain* domainToUnload = mono_domain_get();
+		if (domainToUnload && domainToUnload != mono_get_root_domain())
+		{
+			mono_domain_set(mono_get_root_domain(), false);
+			mono_domain_unload(domainToUnload);
 		}
 	}
 }

@@ -231,7 +231,7 @@ namespace Jade
 		Jade::Physics2D::Init();
 		Jade::Input::Init();
 		Jade::ScriptRuntime::Init();
-		Jade::ScriptCompiler::Init();
+		//Jade::ScriptCompiler::Init();
 		ChangeScene(new LevelEditorScene());
 
 		m_ImGuiLayer = new ImGuiLayer(m_CurrentScene);
@@ -243,6 +243,7 @@ namespace Jade
 	void JadeEditor::Shutdown()
 	{
 		// Engine shutdown sequence
+		Jade::ScriptRuntime::Destroy();
 		Jade::IFileDialog::Destroy();
 		Jade::IFile::Destroy();
 	}

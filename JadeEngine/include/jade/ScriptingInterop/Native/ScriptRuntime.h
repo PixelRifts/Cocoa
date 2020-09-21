@@ -18,19 +18,16 @@ namespace Jade
 		static void Init();
 		static void Destroy();
 
-		static MonoAssembly* OpenCSharpExe(JPath pathToExe);
-		static void CallCSharpMethod(MonoAssembly* assembly, MonoClass* klazz, const std::string& methodName);
 		void OnSceneInit(Scene& scene);
 		void OnSceneUpdate(Scene& scene, float dt);
 		void OnSceneStart(Scene& scene);
 		void OnSceneStop(Scene& scene);
 
-		static void ExecuteScriptableComponent(const JPath& path);
 		static void Serialize(json& j, const Entity& entity, const ScriptableComponent& script);
 		static void Deserialize(json& j, Entity entity);
 
-		static MonoDomain* s_Domain;
 	private:
+		static MonoDomain* s_Domain;
 		static void LoadScriptableComponent(const JPath& path, ScriptableComponent& script);
 
 		MonoDomain* m_CurrentExecutingDomain = nullptr;
