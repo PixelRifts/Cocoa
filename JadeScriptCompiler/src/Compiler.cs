@@ -1,16 +1,11 @@
 ﻿using Microsoft.CSharp;
-using System;
 using System.IO;
 using System.CodeDom.Compiler;
-using System.Runtime.InteropServices;
 using JadeScriptRuntime;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Linq;
 using JadeScriptCompiler.src;
-using System.Reflection;
-using System.Text;
 using System.Collections.Generic;
 
 namespace JadeScriptCompiler
@@ -66,10 +61,6 @@ namespace JadeScriptCompiler
 			}
 
 			return null;
-		}
-
-		static void Main(string[] args)
-		{
 		}
 	}
 }

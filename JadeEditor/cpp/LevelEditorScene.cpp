@@ -1,10 +1,11 @@
 #pragma once
 
+#include "gui/Gizmos.h"
+#include "gui/ImGuiExtended.h"
+#include "gui/FontAwesome.h"
+#include "editorWindows/InspectorWindow.h"
 #include "LevelEditorScene.h"
 #include "LevelEditorSystem.h"
-#include "Gizmos.h"
-#include "Gui/ImGuiExtended.h"
-#include "EditorWindows/InspectorWindow.h"
 
 #include "jade/systems/System.h"
 #include "jade/renderer/DebugDraw.h"
@@ -13,10 +14,9 @@
 #include "jade/util/Settings.h"
 #include "jade/file/JPath.h"
 #include "jade/core/AssetManager.h"
-#include "FontAwesome.h"
 #include "jade/core/Audio.h"
 #include "jade/systems/RenderSystem.h"
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+#include "jade/scripting/ScriptRuntime.h"
 
 #include <entt/entt.hpp>
 #include <imgui.h>

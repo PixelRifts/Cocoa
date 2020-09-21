@@ -1,6 +1,7 @@
 #pragma once
 #include "externalLibs.h"
-#include "Gui/ImGuiHeader.h"
+#include "gui/ImGuiHeader.h"
+
 #include "jade/util/Settings.h"
 #include "jade/commands/ICommand.h"
 #include "jade/renderer/Texture.h"

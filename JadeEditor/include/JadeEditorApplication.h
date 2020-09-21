@@ -1,5 +1,5 @@
+#include "editorWindows/ProjectWizard.h"
 #include "LevelEditorSystem.h"
-#include "ProjectWizard.h"
 #include "PickingTexture.h"
 
 #include "jade/core/Layer.h"

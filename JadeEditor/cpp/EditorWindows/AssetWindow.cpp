@@ -1,7 +1,7 @@
-#include "EditorWindows/AssetWindow.h"
-#include "Gui/ImGuiExtended.h"
-#include "FontAwesome.h"
-#include "Util/Settings.h"
+#include "editorWindows/AssetWindow.h"
+#include "gui/ImGuiExtended.h"
+#include "gui/FontAwesome.h"
+#include "util/Settings.h"
 #include "JadeEditorApplication.h"
 
 #include "jade/core/AssetManager.h"

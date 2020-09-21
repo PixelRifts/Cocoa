@@ -4,7 +4,7 @@
 #include "jade/systems/RenderSystem.h"
 #include "jade/physics2d/Physics2DSystem.h"
 #include "jade/components/ScriptableComponent.h"
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+#include "jade/scripting/ScriptRuntime.h"
 #include "jade/util/Log.h"
 
 #include <nlohmann/json.hpp>

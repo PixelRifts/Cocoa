@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Gui/ImGuiExtended.h"
+#include "gui/ImGuiExtended.h"
 
 #include "jade/components/components.h"
 #include "jade/components/Transform.h"

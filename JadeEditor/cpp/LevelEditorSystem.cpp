@@ -1,5 +1,6 @@
 #include "LevelEditorSystem.h"
-#include "Gui/ImGuiExtended.h"
+#include "gui/ImGuiExtended.h"
+#include "gui/FontAwesome.h"
 
 #include "jade/core/Application.h"
 #include "jade/events/Input.h"
@@ -8,7 +9,6 @@
 #include "jade/util/JMath.h"
 #include "jade/util/Settings.h"
 #include "jade/file/IFile.h"
-#include "FontAwesome.h"
 #include "JadeEditorApplication.h"
 #include "EditorWindows/InspectorWindow.h"
 

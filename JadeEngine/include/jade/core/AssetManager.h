@@ -54,6 +54,7 @@ namespace Jade
 		{
 			None=0,
 			Texture=1,
+			Script=2,
 		};
 	};
 

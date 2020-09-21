@@ -1,4 +1,5 @@
 #include "PickingTexture.h"
+
 #include "jade/util/Log.h"
 
 namespace Jade

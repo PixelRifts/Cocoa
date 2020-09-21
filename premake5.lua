@@ -254,7 +254,7 @@ project "JadeScriptRuntime"
 
 project "JadeScriptCompiler"
     location "JadeScriptCompiler"
-    kind "ConsoleApp"
+    kind "SharedLib"
     language "C#"
 
     editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"

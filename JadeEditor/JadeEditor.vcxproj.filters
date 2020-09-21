@@ -39,33 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AssetWizard.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EditorWindows\AssetWindow.h">
-      <Filter>include\EditorWindows</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EditorWindows\InspectorWindow.h">
-      <Filter>include\EditorWindows</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EditorWindows\SceneHeirarchyWindow.h">
-      <Filter>include\EditorWindows</Filter>
-    </ClInclude>
-    <ClInclude Include="include\FontAwesome.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Gizmos.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Gui\ImGuiExtended.h">
-      <Filter>include\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Gui\ImGuiHeader.h">
-      <Filter>include\Gui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ImGuiLayer.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\JadeEditorApplication.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -75,44 +48,47 @@
     <ClInclude Include="include\LevelEditorSystem.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\MenuBar.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\PickingTexture.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ProjectWizard.h">
+    <ClInclude Include="include\util\Settings.h">
+      <Filter>include\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\ImGuiExtended.h">
+      <Filter>include\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\ImGuiHeader.h">
+      <Filter>include\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\MenuBar.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ScriptingInterop\Native\ScriptCompiler.h">
+    <ClInclude Include="include\editorWindows\AssetWindow.h">
+      <Filter>include\EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="include\editorWindows\InspectorWindow.h">
+      <Filter>include\EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="include\editorWindows\SceneHeirarchyWindow.h">
+      <Filter>include\EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scripting\ScriptCompiler.h">
       <Filter>include\ScriptingInterop\Native</Filter>
     </ClInclude>
-    <ClInclude Include="include\Util\Settings.h">
-      <Filter>include\Util</Filter>
+    <ClInclude Include="include\gui\Gizmos.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\ImGuiLayer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gui\FontAwesome.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\editorWindows\ProjectWizard.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cpp\AssetWizard.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\EditorWindows\AssetWindow.cpp">
-      <Filter>cpp\EditorWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\EditorWindows\InspectorWindow.cpp">
-      <Filter>cpp\EditorWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\EditorWindows\SceneHeirarchyWindow.cpp">
-      <Filter>cpp\EditorWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\Gizmos.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\Gui\ImGuiExtended.cpp">
-      <Filter>cpp\Gui</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\ImGuiLayer.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
     <ClCompile Include="cpp\JadeEditorApplication.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
@@ -122,20 +98,38 @@
     <ClCompile Include="cpp\LevelEditorSystem.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\MenuBar.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
     <ClCompile Include="cpp\PickingTexture.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\ProjectWizard.cpp">
+    <ClCompile Include="cpp\util\Settings.cpp">
+      <Filter>cpp\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\gui\ImGuiExtended.cpp">
+      <Filter>cpp\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\gui\MenuBar.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\ScriptingInterop\Native\ScriptCompiler.cpp">
+    <ClCompile Include="cpp\editorWindows\AssetWindow.cpp">
+      <Filter>cpp\EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\editorWindows\InspectorWindow.cpp">
+      <Filter>cpp\EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\editorWindows\SceneHeirarchyWindow.cpp">
+      <Filter>cpp\EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\scripting\ScriptCompiler.cpp">
       <Filter>cpp\ScriptingInterop\Native</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\Util\Settings.cpp">
-      <Filter>cpp\Util</Filter>
+    <ClCompile Include="cpp\gui\Gizmos.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\gui\ImGuiLayer.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\editorWindows\ProjectWizard.cpp">
+      <Filter>cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-#include "Util/Settings.h"
+#include "util/Settings.h"
 
 namespace Jade
 {

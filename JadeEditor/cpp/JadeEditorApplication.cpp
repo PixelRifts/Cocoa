@@ -1,16 +1,17 @@
 #include "Jade.h"
-#include "Gui/ImGuiHeader.h"
-#include "EditorWindows/InspectorWindow.h"
-#include "ScriptingInterop/Native/ScriptCompiler.h"
-#include "Util/Settings.h"
 
-#include "JadeEditorApplication.h"
+#include "gui/ImGuiHeader.h"
+#include "gui/ImGuiLayer.h"
+#include "editorWindows/InspectorWindow.h"
+#include "scripting/ScriptCompiler.h"
+#include "util/Settings.h"
 #include "LevelEditorScene.h"
-#include "ImGuiLayer.h"
+#include "jadeEditorApplication.h"
+
 #include "jade/file/IFile.h"
 #include "jade/util/Settings.h"
 #include "jade/systems/RenderSystem.h"
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+#include "jade/scripting/ScriptRuntime.h"
 
 #include <glad/glad.h>
 #include <nlohmann/json.hpp>

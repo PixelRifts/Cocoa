@@ -1,9 +1,9 @@
-#include "EditorWindows/SceneHeirarchyWindow.h"
-#include "Gui/ImGuiExtended.h"
+#include "editorWindows/SceneHeirarchyWindow.h"
+#include "gui/ImGuiExtended.h"
+#include "gui/FontAwesome.h"
 
 #include "jade/core/Entity.h"
 #include "jade/components/Transform.h"
-#include "FontAwesome.h"
 
 namespace Jade
 {

@@ -142,15 +142,6 @@
     <ClInclude Include="include\externalLibs.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Native\Logger.h">
-      <Filter>include\jade\ScriptingInterop\Native</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Native\ScriptRuntime.h">
-      <Filter>include\jade\ScriptingInterop\Native</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jade\ScriptingInterop\Native\Test.h">
-      <Filter>include\jade\ScriptingInterop\Native</Filter>
-    </ClInclude>
     <ClInclude Include="include\jade\commands\ChangeEnumCommand.h">
       <Filter>include\jade\commands</Filter>
     </ClInclude>
@@ -1546,6 +1537,12 @@
     <ClInclude Include="vendor\nlohmann-json\single_include\nlohmann\json.hpp">
       <Filter>vendor\nlohmann-json\single_include\nlohmann</Filter>
     </ClInclude>
+    <ClInclude Include="include\jade\scripting\Logger.h">
+      <Filter>include\jade\ScriptingInterop\Native</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\scripting\ScriptRuntime.h">
+      <Filter>include\jade\ScriptingInterop\Native</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\jade\commands\CommandHistory.cpp">
@@ -1623,15 +1620,6 @@
     <ClCompile Include="cpp\jade\scenes\Scene.cpp">
       <Filter>cpp\jade\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="cpp\jade\scriptingInterop\native\Logger.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\jade\scriptingInterop\native\ScriptRuntime.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\jade\scriptingInterop\native\ScriptableComponent.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
-    </ClCompile>
     <ClCompile Include="cpp\jade\systems\RenderSystem.cpp">
       <Filter>cpp\jade\systems</Filter>
     </ClCompile>
@@ -1655,6 +1643,15 @@
     </ClCompile>
     <ClCompile Include="cpp\platform\windows\Win32Window.cpp">
       <Filter>cpp\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\components\ScriptableComponent.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scripting\Logger.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scripting\ScriptRuntime.cpp">
+      <Filter>cpp\jade\scriptingInterop\native</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

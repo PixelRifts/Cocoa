@@ -1,6 +1,6 @@
-#include "ScriptingInterop/Native/ScriptCompiler.h"
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
+#include "scripting/ScriptCompiler.h"
 #include "jade/util/Settings.h"
+#include "jade/file/JPath.h"
 
 #include <mono/metadata/debug-helpers.h>
 #include <mono/metadata/exception.h>
@@ -14,10 +14,11 @@ namespace Jade
 
 	void ScriptCompiler::Init()
 	{
+		JPath jadeScriptCompilerDll = Settings::General::s_EngineExecutableDirectory + "JadeScriptCompiler.dll";
 		s_Domain = mono_domain_create_appdomain("JadeScriptCompiler", NULL);
 		mono_domain_set(s_Domain, false);
 
-		MonoAssembly* assembly = mono_domain_assembly_open(s_Domain, "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptCompiler.exe");
+		MonoAssembly* assembly = mono_domain_assembly_open(s_Domain, jadeScriptCompilerDll.Filepath());
 		if (!assembly)
 		{
 			Log::Error("Failed to load assembly.");
@@ -65,7 +66,7 @@ namespace Jade
 			{
 				MonoString* element = mono_array_get(res, MonoString*, i);
 				char* cStr = mono_string_to_utf8(element);
-				Log::Info("C++ code says: '%s'", cStr);
+				std::string scriptClassName = cStr;
 				mono_free(cStr);
 			}
 		}

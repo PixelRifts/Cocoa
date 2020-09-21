@@ -1,5 +1,6 @@
 #pragma once
 #include "externalLibs.h"
+
 #include "jade/util/Log.h"
 #include "jade/file/JPath.h"
 

@@ -6,13 +6,15 @@
 #define Assert(condition, format, ...) _Assert(__FILE__, __LINE__, condition, format, __VA_ARGS__)
 #define ScriptError(format, ...) _ScriptError(__FILE__, __LINE__, format, __VA_ARGS__)
 
-namespace Jade {
-    class JADE Log {
-    public:
-        static void _Info(const char* filename, int line, const char* format, ...);
-        static void _Warning(const char* filename, int line, const char* format, ...);
-        static void _Error(const char* filename, int line, const char* format, ...);
-        static void _Assert(const char* filename, int line, int condition, const char* format, ...);
-        static void _ScriptError(const char* filename, int line, const char* format, ...);
-    };
+namespace Jade
+{
+	class JADE Log
+	{
+	public:
+		static void _Info(const char* filename, int line, const char* format, ...);
+		static void _Warning(const char* filename, int line, const char* format, ...);
+		static void _Error(const char* filename, int line, const char* format, ...);
+		static void _Assert(const char* filename, int line, int condition, const char* format, ...);
+		static void _ScriptError(const char* filename, int line, const char* format, ...);
+	};
 }

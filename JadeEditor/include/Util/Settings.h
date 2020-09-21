@@ -1,6 +1,8 @@
 #pragma once
 #include "externalLibs.h"
-#include "Gui/ImGuiHeader.h"
+
+#include "gui/ImGuiHeader.h"
+
 #include "jade/file/JPath.h"
 
 namespace Jade

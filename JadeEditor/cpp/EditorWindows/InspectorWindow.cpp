@@ -1,9 +1,9 @@
 #pragma once
 #include "externalLibs.h"
 
-#include "EditorWindows/InspectorWindow.h"
-#include "Gui/ImGuiExtended.h"
-#include "FontAwesome.h"
+#include "editorWindows/InspectorWindow.h"
+#include "gui/ImGuiExtended.h"
+#include "gui/FontAwesome.h"
 
 #include "jade/components/components.h"
 #include "jade/components/Transform.h"

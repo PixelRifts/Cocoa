@@ -1,6 +1,5 @@
-#include "jade/ScriptingInterop/Native/ScriptRuntime.h"
-#include "jade/ScriptingInterop/Native/Test.h"
-#include "jade/ScriptingInterop/Native/Logger.h"
+#include "jade/scripting/ScriptRuntime.h"
+#include "jade/scripting/Logger.h"
 #include "jade/util/Settings.h"
 
 #include <mono/metadata/debug-helpers.h>
@@ -14,18 +13,8 @@ namespace Jade
 	{
 		mono_set_dirs("C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\lib", "C:\\dev\\C++\\MonoTEST\\MonoTest\\monoVendor\\etc");
 
+		// Initialize the root app domain
 		s_Domain = mono_jit_init("JadeEngineScriptRuntime");
-		JPath scriptRuntime = "C:/dev/C++/JadeEngine/bin/Debug-windows-x86_64/JadeEditor/JadeScriptRuntime.exe";
-		MonoImageOpenStatus status;
-		MonoAssembly* assembly = mono_assembly_open(scriptRuntime.Filepath(), &status);
-		if (!assembly)
-		{
-			Log::Error("Failed to load scripting core runtime: %s", scriptRuntime.Filepath());
-		}
-
-		int argc = 1;
-		char* argv[1] = { (char*)"MyDomain" };
-		int returnVal = mono_jit_exec(s_Domain, assembly, argc, argv);
 	}
 
 	void ScriptRuntime::Destroy()

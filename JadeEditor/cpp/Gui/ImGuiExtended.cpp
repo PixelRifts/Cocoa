@@ -1,5 +1,6 @@
 #include "externalLibs.h"
-#include "Gui/ImGuiExtended.h"
+#include "gui/ImGuiExtended.h"
+
 #include "jade/core/Core.h"
 
 namespace JImGui
