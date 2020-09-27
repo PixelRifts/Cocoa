@@ -14,9 +14,11 @@ namespace Jade
 	public:
 		static void Init();
 		static void Compile(const JPath& pathToScript, const JPath& pathToOutput);
+		static std::string GetClassName(const JPath& pathToScript);
 
 	private:
 		static MonoImage* s_CompilerImage;
 		static MonoMethod* s_CompileMethod;
+		static MonoMethod* s_GetClassNameMethod;
 	};
 }

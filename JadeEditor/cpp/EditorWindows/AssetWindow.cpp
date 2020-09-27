@@ -3,6 +3,7 @@
 #include "gui/FontAwesome.h"
 #include "util/Settings.h"
 #include "JadeEditorApplication.h"
+#include "scripting/ScriptCompiler.h"
 
 #include "jade/core/AssetManager.h"
 #include "jade/file/IFile.h"
@@ -179,6 +180,9 @@ namespace Jade
 				}
 				else
 				{
+					JPath newFile = newFilePath + (scriptName + std::string(".cs"));
+					std::string className = ScriptCompiler::GetClassName(newFile);
+					AssetManager::LoadScriptFromFile(newFile, className);
 					creatingScript = false;
 					ImGui::CloseCurrentPopup();
 				}

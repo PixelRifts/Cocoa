@@ -177,6 +177,9 @@ namespace Jade
 			else if (!j["Components"][i]["ScriptableComponent"].is_null())
 			{
 				Entity entity = FindOrCreateEntity(idKey, j["Components"][i]["ScriptableComponent"]["Entity"], this, m_Registry);
+				const json& originalId = j["Components"][i]["ScriptableComponent"]["MetadataAssetId"];
+				if (!originalId.is_null() && (uint32)originalId != std::numeric_limits<uint32>::max())
+					j["Components"][i]["ScriptableComponent"]["MetadataAssetId"] = resourceIdMap[(uint32)originalId];
 				ScriptRuntime::Deserialize(j["Components"][i], entity);
 			}
 		}

@@ -62,5 +62,30 @@ namespace JadeScriptCompiler
 
 			return null;
 		}
+
+		static string GetClassName(string pathToScript, string pathToRuntimeDll)
+		{
+			StreamReader stream = new StreamReader(pathToScript);
+			string code = stream.ReadToEnd();
+			stream.Close();
+			SyntaxTree tree = CSharpSyntaxTree.ParseText(code);
+			CompilationUnitSyntax root = tree.GetCompilationUnitRoot();
+
+			var executableReference = MetadataReference.CreateFromFile(pathToRuntimeDll);
+			var compilation = CSharpCompilation.Create("TmpAssembly")
+				.AddReferences(executableReference)
+				.AddSyntaxTrees(tree);
+
+			var baseType = compilation.GetTypeByMetadataName("JadeScriptRuntime.ScriptableComponent");
+			var classCollector = new ClassCollector(baseType, compilation.GetSemanticModel(tree));
+			classCollector.Visit(root);
+
+			if (classCollector.Classes.Count >= 1)
+			{
+				return classCollector.Classes[0];
+			}
+
+			return "";
+		}
 	}
 }

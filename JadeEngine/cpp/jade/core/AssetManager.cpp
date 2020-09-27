@@ -1,6 +1,7 @@
 #include "jade/core/AssetManager.h"
 #include "jade/util/Log.h"
 #include "jade/renderer/Texture.h"
+#include "jade/scripting/ScriptMetadata.h"
 #include "jade/file/IFile.h"
 #include "jade/util/JsonExtended.h"
 
@@ -88,6 +89,30 @@ namespace Jade
 		return newAsset;
 	}
 
+	std::shared_ptr<Asset> AssetManager::LoadScriptFromFile(const JPath& path, const std::string& className)
+	{
+		AssetManager* manager = Get();
+
+		std::shared_ptr<Asset> assetExists = GetAsset(path);
+		if (!assetExists->IsNull())
+		{
+			Log::Warning("Tried to load asset that has already been loaded.");
+			return std::shared_ptr<Asset>(new NullAsset());
+		}
+
+		JPath absPath = IFile::GetAbsolutePath(path);
+		std::shared_ptr<ScriptMetadata> newAsset = std::make_shared<ScriptMetadata>(absPath.Filepath(), className);
+
+		auto& assets = manager->m_Assets[manager->m_CurrentScene];
+
+		uint32 newId = (uint32)assets.size();
+
+		newAsset->SetResourceId(newId);
+		assets.insert({ newId, newAsset });
+		newAsset->Load();
+		return newAsset;
+	}
+
 	void AssetManager::Clear()
 	{
 		AssetManager* manager = Get();
@@ -147,6 +172,12 @@ namespace Jade
 						resourceIDMap.insert({resourceId, tex->GetResourceId()});
 					}
 					break;
+					case Asset::AssetType::Script:
+					{
+						std::shared_ptr<Asset> script = LoadScriptFromFile(path, "");
+						resourceIDMap.insert({ resourceId, script->GetResourceId() });
+						break;
+					}
 					default:
 						Log::Warning("Unkown asset type %d for: %s", type, path.Filepath());
 						break;
@@ -189,13 +220,21 @@ namespace Jade
 
 	json Asset::Serialize()
 	{
+		Log::Info("Serializing '%s'", m_Path.Filepath());
 		Asset::AssetType type = Asset::AssetType::None;
 		if (GetType() == Asset::GetResourceTypeId<Texture>())
 		{
 			type = Asset::AssetType::Texture;
+			Log::Info("Type texture");
+		}
+		else if (GetType() == Asset::GetResourceTypeId<ScriptMetadata>())
+		{
+			type = Asset::AssetType::Script;
+			Log::Info("Type Script");
 		}
 		else
 		{
+			Log::Info("Type None");
 			return { {"Type", Asset::AssetType::None} };
 		}
 

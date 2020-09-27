@@ -1543,6 +1543,7 @@
     <ClInclude Include="include\jade\scripting\ScriptRuntime.h">
       <Filter>include\jade\ScriptingInterop\Native</Filter>
     </ClInclude>
+    <ClInclude Include="include\jade\scripting\ScriptMetadata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\jade\commands\CommandHistory.cpp">

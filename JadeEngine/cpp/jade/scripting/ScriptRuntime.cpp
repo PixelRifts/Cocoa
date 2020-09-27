@@ -49,7 +49,7 @@ namespace Jade
 		for (auto entity : scriptView)
 		{
 			ScriptableComponent& script = reg.get<ScriptableComponent>(entity);
-			MonoClass* klazz = mono_class_from_name(m_CurrentExecutingImage, "", "MyScript");
+			MonoClass* klazz = mono_class_from_name(m_CurrentExecutingImage, "", script.GetMetadata()->GetClassName().c_str());
 			MonoObject* obj = mono_object_new(m_CurrentExecutingDomain, klazz);
 			mono_runtime_object_init(obj);
 
@@ -95,13 +95,13 @@ namespace Jade
 
 	void ScriptRuntime::Serialize(json& j, const Entity& entity, const ScriptableComponent& script)
 	{
-		json path = { "Path", script.GetFilepath().Filepath() };
+		json assetId = { "MetadataAssetId", script.GetMetadata()->GetResourceId() };
 
 		int size = j["Size"];
 		j["Components"][size] = {
 			{"ScriptableComponent", {
 				{"Entity", entity.GetID()},
-				path
+				assetId
 			}}
 		};
 
@@ -110,7 +110,8 @@ namespace Jade
 
 	void ScriptRuntime::Deserialize(json& j, Entity entity)
 	{
-		JPath path = j["ScriptableComponent"]["Path"];
-		entity.AddComponent<ScriptableComponent>(path);
+		uint32 assetId = j["ScriptableComponent"]["MetadataAssetId"];
+		std::shared_ptr<ScriptMetadata> metadata = std::static_pointer_cast<ScriptMetadata>(AssetManager::GetAsset(assetId));
+		entity.AddComponent<ScriptableComponent>(metadata);
 	}
 }

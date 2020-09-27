@@ -136,7 +136,16 @@ namespace Jade
 
 		if (JImGui::ButtonDropdown(ICON_FA_PLUS " Choose Script", scriptFilesChar.data(), (int)scriptFilesChar.size(), itemPressed))
 		{
-			activeEntity.AddComponent<ScriptableComponent>(scriptFiles.at(itemPressed));
+			std::shared_ptr<Asset> assetPtr = AssetManager::GetAsset(scriptFiles.at(itemPressed));
+			if (!assetPtr->IsNull())
+			{
+				std::shared_ptr<ScriptMetadata> metadata = std::static_pointer_cast<ScriptMetadata>(assetPtr);
+				activeEntity.AddComponent<ScriptableComponent>(metadata);
+			}
+			else
+			{
+				Log::Warning("Unable to add script '%s'. It was never loaded properly", scriptFiles.at(itemPressed).Filepath());
+			}
 			s_GettingScript = false;
 		}
 	}
@@ -210,7 +219,7 @@ namespace Jade
 			if (JImGui::Button("Compile Script"))
 			{
 				Log::Warning("TODO: Implement me to compile script!");
-				
+
 			}
 			JImGui::Label("Script: ", script.GetFilepath().Filename());
 

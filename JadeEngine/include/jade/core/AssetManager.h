@@ -65,6 +65,7 @@ namespace Jade
 		static std::shared_ptr<Asset> GetAsset(uint32 resourceID);
 		static std::shared_ptr<Asset> GetAsset(const JPath& path);
 		static std::shared_ptr<Asset> LoadTextureFromFile(const JPath& path, bool isDefault=false);
+		static std::shared_ptr<Asset> LoadScriptFromFile(const JPath& path, const std::string& className);
 
 		template<typename T>
 		static std::vector<std::shared_ptr<T>> GetAllAssets(uint32 scene)
