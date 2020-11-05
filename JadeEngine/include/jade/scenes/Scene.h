@@ -34,6 +34,7 @@ namespace Jade
 		inline Camera* GetCamera() { return m_Camera; }
 		inline const std::vector<std::unique_ptr<System>>& GetSystems() { return m_Systems; }
 		inline entt::registry& GetRegistry() { return m_Registry; }
+		inline ScriptRuntime* GetRuntime() { return scriptRuntime; }
 
 		// TODO: TEMPORARY GET BETTER SYSTEM THAN THESE!!!
 		inline json& GetSaveDataJson() { return m_SaveDataJson; }

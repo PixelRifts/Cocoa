@@ -220,21 +220,17 @@ namespace Jade
 
 	json Asset::Serialize()
 	{
-		Log::Info("Serializing '%s'", m_Path.Filepath());
 		Asset::AssetType type = Asset::AssetType::None;
 		if (GetType() == Asset::GetResourceTypeId<Texture>())
 		{
 			type = Asset::AssetType::Texture;
-			Log::Info("Type texture");
 		}
 		else if (GetType() == Asset::GetResourceTypeId<ScriptMetadata>())
 		{
 			type = Asset::AssetType::Script;
-			Log::Info("Type Script");
 		}
 		else
 		{
-			Log::Info("Type None");
 			return { {"Type", Asset::AssetType::None} };
 		}
 

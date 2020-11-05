@@ -8,8 +8,15 @@
     #else 
         #define JADE __declspec(dllimport)
     #endif
+
+    #ifdef _JADE_EDITOR_DLL
+        #define JADE_EDITOR __declspec(dllexport)
+    #else 
+        #define JADE_EDITOR __declspec(dllimport)
+    #endif
 #else 
     #define JADE
+    #define JADE_EDITOR
 #endif
 
 /* Button actions */

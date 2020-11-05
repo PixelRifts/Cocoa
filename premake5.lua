@@ -97,14 +97,9 @@ project "JadeEngine"
 		}
 
     postbuildcommands {
-<<<<<<< HEAD
-        "mkdir \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\"",
-        "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeEngine.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\JadeEngine.dll\"",
-        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\mono-2.0-sgen.dll\"",
-=======
         "if not exist \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\" mkdir \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\"",
         "copy /y \"$(SolutionDir)%{fullOutputDir}\\JadeEngine.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\JadeEngine.dll\"",
->>>>>>> 530c9b9701d24f7f3165bd64cecfa0ecbbd6b782
+        "copy /y \"$(SolutionDir)JadeEngine\\vendor\\monoVendor\\bin\\mono-2.0-sgen.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\mono-2.0-sgen.dll\"",
         "copy /y \"$(SolutionDir)JadeEngine\\vendor\\GLFW\\bin\\%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}\\GLFW\\GLFW.dll\" \"$(SolutionDir)%{fullOutputDir}\\..\\JadeEditor\\GLFW.dll\""
     }
     
@@ -193,6 +188,14 @@ project "JadeEditor"
             "_JADE_PLATFORM_WINDOWS"
         }
 
+        linkoptions {
+            "/INCLUDE:_UndoableDragFloat3",
+            "/INCLUDE:_UndoableDragFloat2",
+            "/INCLUDE:_UndoableDragFloat",
+            "/MAP",
+            "/MAPINFO:EXPORTS"
+		}
+
     filter "configurations:Debug"
         defines {
 			"_JADE_DEBUG",
@@ -215,11 +218,11 @@ project "JadeEditor"
         optimize "on"
 
 
-
 project "JadeScriptRuntime"
     location "JadeScriptRuntime"
     kind "SharedLib"
     language "C#"
+    clr "Unsafe"
 
     editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
     fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"
@@ -261,6 +264,7 @@ project "JadeScriptCompiler"
     location "JadeScriptCompiler"
     kind "SharedLib"
     language "C#"
+    clr "Unsafe"
 
     editorOutputDir = "bin/" .. outputdir .. "/JadeEditor"
     fullOutputDir = "bin/" .. outputdir .. "/%{prj.name}"

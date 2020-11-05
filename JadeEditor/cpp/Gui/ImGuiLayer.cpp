@@ -97,6 +97,8 @@ namespace Jade
 
 		//CustomStyle();
 		LoadStyle(Settings::General::s_EditorStyleData);
+
+		InspectorWindow::Init(m_Scene);
 	}
 
 	void ImGuiLayer::OnEvent(Event& e)
@@ -165,6 +167,7 @@ namespace Jade
 					m_Scene->Save(Settings::General::s_EngineAssetsPath + "tmp.jade");
 					JPath outputPath = Settings::General::s_EngineExecutableDirectory + "JadeScripts.dll";
 					JPath scriptsDir = Settings::General::s_WorkingDirectory + "scripts";
+					ScriptCompiler::EditorStop();
 					ScriptCompiler::Compile(scriptsDir.Filepath(), outputPath);
 					m_Scene->Play();
 					isPlaying = true;
@@ -177,6 +180,7 @@ namespace Jade
 				{
 					m_Scene->Stop();
 					m_Scene->Load(Settings::General::s_EngineAssetsPath + "tmp.jade");
+					ScriptCompiler::EditorInit(*m_Scene);
 					isPlaying = false;
 				}
 				ImGui::EndMenu();

@@ -148,7 +148,6 @@ namespace Jade
 
 		Settings::General::s_EditorSaveData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorSaveData;
 		Settings::General::s_EditorStyleData = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::General::s_EditorStyleData;
-		Settings::EditorVariables::s_DefaultScriptLocation = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::EditorVariables::s_DefaultScriptLocation;
 		Settings::EditorVariables::s_CodeEditorExe = IFile::GetSpecialAppFolder() + ".." + "Local" + "Programs" + "Microsoft VS Code" + Settings::EditorVariables::s_CodeEditorExe;
 
 		LoadEditorData(Settings::General::s_EditorSaveData);
@@ -216,13 +215,11 @@ namespace Jade
 
 	void JadeEditor::Init()
 	{
-		// Initialize GLAD here, so that it works in DLL and exe
-		//if (!gladLoadGL())
-		//{
-		//	Log::Error("Error loading GLAD in exe.");
-		//}
 		Log::Info("Initializing GLAD functions in exe.");
-		Log::Assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress), "Unable to initialize GLAD.");
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			Log::Error("Unable to initialize GLAD in exe.");
+		}
 
 		// Engine initialization
 		Jade::AssetManager::Init(0);
@@ -231,9 +228,10 @@ namespace Jade
 		Jade::ProjectWizard::Init();
 		Jade::Physics2D::Init();
 		Jade::Input::Init();
-		Jade::ScriptRuntime::Init();
-		//Jade::ScriptCompiler::Init();
 		ChangeScene(new LevelEditorScene());
+
+		Jade::ScriptRuntime::Init();
+		Jade::ScriptCompiler::Init(m_CurrentScene->GetRuntime());
 
 		m_ImGuiLayer = new ImGuiLayer(m_CurrentScene);
 		m_EditorLayer = new EditorLayer(m_CurrentScene);

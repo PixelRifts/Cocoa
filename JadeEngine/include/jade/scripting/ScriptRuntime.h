@@ -26,9 +26,14 @@ namespace Jade
 		static void Serialize(json& j, const Entity& entity, const ScriptableComponent& script);
 		static void Deserialize(json& j, Entity entity);
 
+		void SetCurrentDomain(const std::string& domainName);
+		MonoAssembly* LoadCSharpAssembly(const JPath& assemblyPath);
+		void SetCurrentCSharpImage(MonoAssembly* assembly, const JPath& assemblyPath);
+		void InitScriptableComponent(ScriptableComponent& script);
+		void UnloadCurrentDomain();
+
 	private:
 		static MonoDomain* s_Domain;
-		static void LoadScriptableComponent(const JPath& path, ScriptableComponent& script);
 
 		MonoDomain* m_CurrentExecutingDomain = nullptr;
 		MonoImage* m_CurrentExecutingImage = nullptr;

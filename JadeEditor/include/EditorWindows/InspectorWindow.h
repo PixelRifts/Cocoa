@@ -12,6 +12,8 @@ namespace Jade
 	class InspectorWindow
 	{
 	public:
+		static void Init(Scene* scene);
+
 		static void ImGui();
 		static void AddEntity(Entity entity);
 		static void RemoveEntity(Entity entity);
@@ -46,6 +48,7 @@ namespace Jade
 		static void ImGuiAddScriptDropdown(Entity& activeEntity);
 
 	private:
+		static Scene* s_Scene;
 		static std::vector<Entity> s_ActiveEntities;
 		static bool s_GettingScript;
 	};

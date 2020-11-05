@@ -34,11 +34,8 @@
     <Filter Include="cpp\jade\scenes">
       <UniqueIdentifier>{9B78840C-0704-F2D0-1015-75C57C1F4ED1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp\jade\scriptingInterop">
-      <UniqueIdentifier>{8EA07F8B-FA62-B315-4313-42A2AF148CF3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\jade\scriptingInterop\native">
-      <UniqueIdentifier>{8404D521-7055-C063-99B9-AE25856953CD}</UniqueIdentifier>
+    <Filter Include="cpp\jade\scripting">
+      <UniqueIdentifier>{8D28FB0D-790C-BC63-E26C-B6B6CE6FA6E5}</UniqueIdentifier>
     </Filter>
     <Filter Include="cpp\jade\systems">
       <UniqueIdentifier>{D2AA65D1-BEA3-8423-E7D5-69A8D32D642F}</UniqueIdentifier>
@@ -57,12 +54,6 @@
     </Filter>
     <Filter Include="include\jade">
       <UniqueIdentifier>{EC16DD69-D879-6C0E-81FF-A4C46D413891}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\jade\ScriptingInterop">
-      <UniqueIdentifier>{CF0368FC-3B1C-4F26-04C9-DEBF70A0E3BF}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include\jade\ScriptingInterop\Native">
-      <UniqueIdentifier>{850022A5-71E7-E39C-1A38-4ABA06FE5C03}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\jade\commands">
       <UniqueIdentifier>{CDD7AF9B-3944-6B96-0238-03F46E638DFE}</UniqueIdentifier>
@@ -90,6 +81,9 @@
     </Filter>
     <Filter Include="include\jade\scenes">
       <UniqueIdentifier>{BCBAA3B9-281C-81C7-B189-C7791DEAB786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\jade\scripting">
+      <UniqueIdentifier>{0E43FDBE-FA3C-2611-E3A9-BC21CF428C7D}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\jade\systems">
       <UniqueIdentifier>{13316D22-FFBF-F6EB-A8DE-0AE7944C0792}</UniqueIdentifier>
@@ -270,6 +264,12 @@
     </ClInclude>
     <ClInclude Include="include\jade\scenes\Scene.h">
       <Filter>include\jade\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\scripting\ScriptMetadata.h">
+      <Filter>include\jade\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jade\scripting\ScriptRuntime.h">
+      <Filter>include\jade\scripting</Filter>
     </ClInclude>
     <ClInclude Include="include\jade\systems\RenderSystem.h">
       <Filter>include\jade\systems</Filter>
@@ -1537,17 +1537,13 @@
     <ClInclude Include="vendor\nlohmann-json\single_include\nlohmann\json.hpp">
       <Filter>vendor\nlohmann-json\single_include\nlohmann</Filter>
     </ClInclude>
-    <ClInclude Include="include\jade\scripting\Logger.h">
-      <Filter>include\jade\ScriptingInterop\Native</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jade\scripting\ScriptRuntime.h">
-      <Filter>include\jade\ScriptingInterop\Native</Filter>
-    </ClInclude>
-    <ClInclude Include="include\jade\scripting\ScriptMetadata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp\jade\commands\CommandHistory.cpp">
       <Filter>cpp\jade\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\components\ScriptableComponent.cpp">
+      <Filter>cpp\jade\components</Filter>
     </ClCompile>
     <ClCompile Include="cpp\jade\components\Transform.cpp">
       <Filter>cpp\jade\components</Filter>
@@ -1621,6 +1617,12 @@
     <ClCompile Include="cpp\jade\scenes\Scene.cpp">
       <Filter>cpp\jade\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="cpp\jade\scripting\Logger.cpp">
+      <Filter>cpp\jade\scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\jade\scripting\ScriptRuntime.cpp">
+      <Filter>cpp\jade\scripting</Filter>
+    </ClCompile>
     <ClCompile Include="cpp\jade\systems\RenderSystem.cpp">
       <Filter>cpp\jade\systems</Filter>
     </ClCompile>
@@ -1644,15 +1646,6 @@
     </ClCompile>
     <ClCompile Include="cpp\platform\windows\Win32Window.cpp">
       <Filter>cpp\platform\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\jade\components\ScriptableComponent.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\jade\scripting\Logger.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
-    </ClCompile>
-    <ClCompile Include="cpp\jade\scripting\ScriptRuntime.cpp">
-      <Filter>cpp\jade\scriptingInterop\native</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

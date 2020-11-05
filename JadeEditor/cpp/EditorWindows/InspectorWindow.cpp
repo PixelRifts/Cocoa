@@ -2,6 +2,7 @@
 #include "externalLibs.h"
 
 #include "editorWindows/InspectorWindow.h"
+#include "scripting/ScriptCompiler.h"
 #include "gui/ImGuiExtended.h"
 #include "gui/FontAwesome.h"
 
@@ -14,8 +15,14 @@
 
 namespace Jade
 {
+	Scene* InspectorWindow::s_Scene = nullptr;
 	std::vector<Entity> InspectorWindow::s_ActiveEntities = std::vector<Entity>();
 	bool InspectorWindow::s_GettingScript = false;
+
+	void InspectorWindow::Init(Scene* scene)
+	{
+		s_Scene = scene;
+	}
 
 	void InspectorWindow::ImGui()
 	{
@@ -216,12 +223,17 @@ namespace Jade
 		{
 			JImGui::BeginCollapsingHeaderGroup();
 
-			if (JImGui::Button("Compile Script"))
+			if (JImGui::Button("Compile"))
 			{
-				Log::Warning("TODO: Implement me to compile script!");
-
+				JPath outputPath = Settings::General::s_EngineExecutableDirectory + "JadeScripts.dll";
+				JPath scriptsDir = Settings::General::s_WorkingDirectory + "scripts";
+				ScriptCompiler::EditorStop();
+				ScriptCompiler::Compile(scriptsDir.Filepath(), outputPath);
+				ScriptCompiler::EditorInit(*s_Scene);
 			}
+
 			JImGui::Label("Script: ", script.GetFilepath().Filename());
+			script.ImGui();
 
 			JImGui::EndCollapsingHeaderGroup();
 		}

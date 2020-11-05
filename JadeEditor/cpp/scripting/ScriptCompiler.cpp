@@ -1,4 +1,9 @@
 #include "scripting/ScriptCompiler.h"
+#include "scripting/JImGui.h"
+#include "util/Settings.h"
+#include "gui/ImGuiExtended.h"
+
+#include "jade/file/IFile.h"
 #include "jade/util/Settings.h"
 #include "jade/file/JPath.h"
 #include "jade/scripting/ScriptMetadata.h"
@@ -12,10 +17,36 @@ namespace Jade
 	MonoImage* ScriptCompiler::s_CompilerImage = nullptr;
 	MonoMethod* ScriptCompiler::s_CompileMethod = nullptr;
 	MonoMethod* ScriptCompiler::s_GetClassNameMethod = nullptr;
+	ScriptRuntime* ScriptCompiler::s_ScriptRuntime = nullptr;
 
 	static MonoDomain* s_Domain = nullptr;
 
-	void ScriptCompiler::Init()
+	void ScriptCompiler::Init(ScriptRuntime* scriptRuntime)
+	{
+		Log::Info("Initializing script compiler");
+		s_ScriptRuntime = scriptRuntime;
+		Settings::EditorVariables::s_DefaultScriptLocation = IFile::GetSpecialAppFolder() + "JadeEngine" + Settings::EditorVariables::s_DefaultScriptLocation;
+		if (!IFile::IsFile(Settings::EditorVariables::s_DefaultScriptLocation))
+		{
+			Log::Info("Creating default script file at: '%s'", Settings::EditorVariables::s_DefaultScriptLocation.Filepath());
+			const char* defaultScript =
+				"using JadeScriptRuntime;\n\n"
+				"public class ScriptName : ScriptableComponent\n"
+				"{\n"
+				"\tpublic override void Start()\n"
+				"\t{\n"
+				"\t\tDebug.LogInfo(\"This is the start method, place any startup information in here to be run once\");\n"
+				"\t}\n\n"
+				"\tpublic override void Update(float dt)\n"
+				"\t{\n"
+				"\t\tDebug.LogInfo($\"This is the update method, run once every frame where {dt} is delta time for the last frame in milliseconds.\");\n"
+				"\t}\n"
+				"}\n";
+			IFile::WriteFile(defaultScript, Settings::EditorVariables::s_DefaultScriptLocation);
+		}
+	}
+
+	void ScriptCompiler::LoadCSharp()
 	{
 		JPath jadeScriptCompilerDll = Settings::General::s_EngineExecutableDirectory + "JadeScriptCompiler.dll";
 		s_Domain = mono_domain_create_appdomain("JadeScriptCompiler", NULL);
@@ -58,7 +89,7 @@ namespace Jade
 
 	void ScriptCompiler::Compile(const JPath& pathToScripts, const JPath& pathToOutput)
 	{
-		Init();
+		LoadCSharp();
 		void* args[3];
 
 		MonoString* monoPathToScripts = mono_string_new(s_Domain, pathToScripts.Filepath());
@@ -107,7 +138,7 @@ namespace Jade
 
 	std::string ScriptCompiler::GetClassName(const JPath& pathToScript)
 	{
-		Init();
+		LoadCSharp();
 		void* args[2];
 
 		MonoString* monoPathToScript = mono_string_new(s_Domain, pathToScript.Filepath());
@@ -135,5 +166,31 @@ namespace Jade
 		}
 
 		return className;
+	}
+
+	void ScriptCompiler::EditorInit(Scene& scene)
+	{
+		s_ScriptRuntime->SetCurrentDomain("ScriptEditorDomain");
+
+		JPath jadeScriptsDll = Settings::General::s_EngineExecutableDirectory + "JadeScripts.dll";
+		MonoAssembly* assembly = s_ScriptRuntime->LoadCSharpAssembly(jadeScriptsDll);
+		s_ScriptRuntime->SetCurrentCSharpImage(assembly, jadeScriptsDll);
+
+		entt::registry& reg = scene.GetRegistry();
+		auto scriptView = reg.view<ScriptableComponent>();
+		for (auto entity : scriptView)
+		{
+			ScriptableComponent& script = reg.get<ScriptableComponent>(entity);
+			s_ScriptRuntime->InitScriptableComponent(script);
+		}
+
+		//mono_add_internal_call("JadeScriptRuntime.JImGui::_UndoableDragFloat3", &ScriptingInterop::_UndoableDragFloat3);
+		//mono_add_internal_call("JadeScriptRuntime.JImGui::_UndoableDragFloat2", &ScriptingInterop::_UndoableDragFloat2);
+		//mono_add_internal_call("JadeScriptRuntime.JImGui::_UndoableDragFloat", &ScriptingInterop::_UndoableDragFloat);
+	}
+
+	void ScriptCompiler::EditorStop()
+	{
+		s_ScriptRuntime->UnloadCurrentDomain();
 	}
 }
